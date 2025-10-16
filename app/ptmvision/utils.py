@@ -52,7 +52,7 @@ def get_contacts(dist_matrix, threshold):
 
 
 def get_structure(uniprot_id):
-    url = "https://alphafold.ebi.ac.uk/files/AF-{}-F1-model_v4.pdb".format(uniprot_id)
+    url = "https://alphafold.ebi.ac.uk/files/AF-{}-F1-model_v6.pdb".format(uniprot_id)
     structure = None
     try:
         response = urllib.request.urlopen(url)
