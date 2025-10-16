@@ -610,6 +610,12 @@ def read_msfragger(file):
         print( "\33[33mSTATUS [" + str(datetime.now()) + "]\33[0m\tProcess data of type 'msfragger' ... ", end = '', flush = True)
     # read file and pick relevant rows and columns
     pept_mods = pd.read_csv(file, sep="\t")
+    
+    # Test
+    pept_mods.rename( columns={ "Modified Sequence": "Modified Peptide", "Peptide Sequence": "Peptide" }, inplace = True )
+    if not 'MSFragger Localization' in pept_mods.columns:
+        pept_mods['MSFragger Localization'] = np.nan
+
     pept_mods = pept_mods[
         [
             "Modified Peptide",
