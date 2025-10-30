@@ -95,6 +95,7 @@ Licensed under GPL-3.0
 			type="text/javascript"
 			src="{{url_for('static', filename='js/ptmvision-1.1.main.js')}}"
 		></script>
+		<!-- Font Awesome for icons... -->
 		<script
 			type="text/javascript"
 			src="https://kit.fontawesome.com/df04f22e3d.js"
@@ -103,6 +104,7 @@ Licensed under GPL-3.0
 	</head>
 	<body onLoad="init();">
 		<!-- App menu -->
+		<!-- Header = top bar on the page with navigation to different spots - keep???-->
 		<header
 			id="menu"
 			class="app-bar app-bar-expand"
@@ -177,11 +179,13 @@ Licensed under GPL-3.0
 				</li>
 			</ul>
 		</header>
+		<!-- End Header bar-->
 
 		<div id="main">
 			<div id="panel">
 				<div id="vline"></div>
 
+				<!-- The info panel with all needed information about PTMVision-->
 				<div id="panel-info" class="panel-container">
 					<div id="panel-info-header">
 						<h3><strong>PTMVision</strong></h3>
@@ -338,7 +342,9 @@ Licensed under GPL-3.0
 						</div>
 					</div>
 				</div>
+				<!-- Ende Info Panel-->
 
+				<!-- Panel, where Protein Data is entered (Input-Panel)-->
 				<div id="panel-inputs" class="panel-container">
 					<h5 style="font-weight: 600">
 						<i class="fa-duotone fa-circle-1"></i>
@@ -875,7 +881,9 @@ Licensed under GPL-3.0
 						</table>
 					</div>
 				</div>
+				<!-- End Input Panel-->
 
+				<!-- Panel for PTM Overview -->
 				<div id="panel-overview" class="panel-container">
 					<h5 style="font-weight: 600">
 						<i class="fa-duotone fa-circle-2"></i>
@@ -983,7 +991,9 @@ Licensed under GPL-3.0
 						</button>
 					</div>
 				</div>
+				<!-- End PTM Overview Panel-->
 
+				<!-- Protein Selection -->
 				<div id="panel-table" class="panel-container">
 					<div class="grid">
 						<div class="row">
@@ -1095,7 +1105,9 @@ Licensed under GPL-3.0
 						Display
 					</button>
 				</div>
+				<!-- End Protein Selection -->
 
+				<!-- Protein Info View (2 in 1 Panel) -->
 				<div id="panel-dashboard" class="panel-container">
 					<h5 style="font-weight: 600">
 						<i class="fa-duotone fa-circle-4"></i>
@@ -1245,6 +1257,8 @@ Licensed under GPL-3.0
 						</button>
 					</div>
 				</div>
+				<!-- End Protein View -->
+
 			</div>
 		</div>
 	</body>
