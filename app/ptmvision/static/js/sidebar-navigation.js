@@ -14,5 +14,6 @@ Function for closing the side navigation bar.
 Sets the width of it to zero (making it invisible).
 */
 function closeSideNavigationBar(){
-
+    document.getElementById("sidebar").style.width = "0px";
+    document.getElementById("main").style.marginLeft = "0px";
 }
