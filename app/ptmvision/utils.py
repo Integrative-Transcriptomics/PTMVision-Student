@@ -11,8 +11,8 @@ from tempfile import NamedTemporaryFile
 from datetime import datetime
 import re, urllib.request, requests, brotli, base64, os
 
-#BASEPATH = "./app/ptmvision" # Uncomment for local development.
-BASEPATH = "/app/ptmvision" # Uncomment for deployment.
+BASEPATH = "./app/ptmvision" # Uncomment for local development.
+#BASEPATH = "/app/ptmvision" # Uncomment for deployment.
 #UNIMOD_MAPPER = unimod.Unimod("sqlite:///unimod.db") # Uncomment for local development.
 UNIMOD_MAPPER = unimod.Unimod( ) # Uncomment for deployment.
 TOLERANCE = 0.001 # Mass tolerance when matching masses to unimod IDs.
