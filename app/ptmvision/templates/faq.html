@@ -30,36 +30,35 @@ Licensed under GPL-3.0
 	<!--
       Definition of java script files to use in the application.
       -->
-	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.7.1.min.js')}}"></script>
-	<script type="text/javascript" src="{{url_for('static', filename='js/metro-5.0.0.rc9.min.js')}}"></script>
-	<script type="text/javascript" src="{{url_for('static', filename='js/axios-1.1.2.min.js')}}"></script>
 	<script type="text/javascript" src="{{url_for('static', filename='js/ptmvision-1.1.global.js')}}"></script>
 	<script type="text/javascript" src="https://kit.fontawesome.com/df04f22e3d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../static/js/navbar.js"></script>
 </head>
 
 <body>
-    <!--Navigation Menu-->
-    <div id="Navigation" class="navigation">
-        <nav id="NavBlock" class="navigation">
-            <h1>PTM Vision</h1>
+	<!--Navigation Menu-->
+	<div id="Navigation" class="navigation">
+		<nav id="NavBlock" class="navigation">
+			<h1>PTM Vision</h1>
 
-            Links:
-            <ul id="HTMLNavigation">
-                <li><a href="./usage_guide.html">Guide</a></li>
-                <li><a href="./faq.html">FAQ</a></li>
-                <li><a href="./legal_information.html">Legal Information</a></li>
-            </ul>
+			Links:
+			<ul id="HTMLNavigation">
+				<li><a href="./usage_guide.html">Guide</a></li>
+				<li><a href="./faq.html">FAQ</a></li>
+				<li><a href="./legal_information.html">Legal Information</a></li>
+			</ul>
 
-            <!-- Close Button for the Navigation Menu-->
-            <button id="NavCloseButton" onclick="closeNavBar()">Close</button>
+			<!-- Close Button for the Navigation Menu-->
+			<button id="NavCloseButton" onclick="closeNavBar()">Close</button>
 
-        </nav>
+		</nav>
 
-        <!--Button/Image for opening the Side Navigation Bar (transparent - for bg add button around it)-->
-		<img src="../static/resources/icon_64.png" onclick="openNavBar()" id="NavOpenButton">
-		
-    </div>
+		<!--Button/Image for opening the Side Navigation Bar (transparent - for bg add button around it)-->
+		<a>
+			<img src="../static/resources/icon_64.png" onclick="openNavBar()" id="NavOpenButton">
+		</a>
+
+	</div>
 
 	<main id="MainContent">
 		<div class="text-container text-just text-light">
