@@ -1,0 +1,44 @@
+body{
+    background-color: lightgray;
+}
+
+main{
+    background-color: red;
+    /*margin-left (0.1% more then width of NavigationButton) -> looks nice*/
+    margin-left: 2.1%;
+}
+
+/*Sections made for Input, Overview, Protein Selection, ...*/
+section{
+    margin: 0.5%;
+}
+
+/*Sections*/
+#AboutSection{
+    background-color: wheat;
+}
+
+/*TODO: Buttons for changing datasets/comparative view*/
+#ModeSelector{
+    border: 1px solid black;
+}
+
+#InputSection{
+    background-color: gray;
+}
+
+#OverviewSection{
+    background-color: aqua;
+}
+
+#ProteinSelectionSection{
+    background-color: pink;
+}
+
+#ProteinDetailsSection{
+    background-color: yellow;
+}
+
+#ModificationDetailsSection{
+    background-color: blueviolet;
+}

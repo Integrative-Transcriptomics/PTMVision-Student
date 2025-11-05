@@ -1,0 +1,56 @@
+/*
+Stylesheet specific for the navigation bar
+*/
+
+
+/*The button (image) for opening the navigation menu*/
+#NavOpenButton{
+    position: fixed;
+    z-index: 1;
+    width: 2%;
+}
+
+
+/*The Navigation menu*/
+#NavBlock{
+    position: fixed;
+    z-index: 2;
+    width: 0;
+    background-color: lightslategray;
+    overflow: hidden;
+    height: 50%;
+    width: 0%;
+    transition: 0.1s;
+}
+
+
+/*Heading in the navigation block*/
+#NavBlock h1{
+    display: block;
+}
+
+
+/*All links in the navigation block*/
+#NavBlock a{
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+
+/*The list for navigating on the website in the navigation block*/
+#NavBlock #SiteNavigation{
+    list-style-type: none;
+}
+
+
+/*The list for navigating the different htmls of PTMVision in the navigation block*/
+#NavBlock #HTMLNavigation{
+    list-style-type: none;
+}
+
+/*Button to close the navigation menu*/
+#NavCloseButton{
+    color: white;
+    background-color: black;
+}
