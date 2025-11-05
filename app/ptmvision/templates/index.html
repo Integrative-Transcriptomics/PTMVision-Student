@@ -8,9 +8,7 @@
 
     <!-- Stylesheet -->
     <link rel="Stylesheet" href="../static/css/style.css">
-    <link rel="Stylesheet" href="../static/css/nav-style.css"
-
-    <!-- Javascript -->
+    <link rel="Stylesheet" href="../static/css/nav-style.css" <!-- Javascript -->
     <script src="../static/js/navbar.js"></script>
 
 </head>
@@ -18,43 +16,44 @@
 <body>
 
     <!--Navigation Menu-->
-    <nav id="NavBlock" class="navigation">
-        <h1>PTM Layout</h1>
-        
-        Navigation:
-        <ul id="SiteNavigation">
-            <li><a href="#InputSection">Input</a></li>
-            <li><a href="#OverviewSection">Overview</a></li>
-            <li><a href="#ProteinSelectionSection">Protein Selection</a></li>
-            <li><a href="#ProteinDetailsSection">Protein Details</a></li>
-            <li><a href="#ModificationDetailsSection">Modification Details</a></li>
-        </ul>
+    <div id="Navigation" class="navigation">
+        <nav id="NavBlock" class="navigation">
+            <h1>PTM Vision</h1>
 
-        Links:
-        <ul id="HTMLNavigation">
-            <!--Currently all placeholder: TODO:-->
-            <li><a href="./usage_guide.html">Guide</a></li>
-            <li><a href="./faq.html">FAQ</a></li>
-            <li><a href="./legal_information.html">Legal Information</a></li>
-        </ul>
+            Navigation:
+            <ul id="SiteNavigation">
+                <li><a href="#InputSection">Input</a></li>
+                <li><a href="#OverviewSection">Overview</a></li>
+                <li><a href="#ProteinSelectionSection">Protein Selection</a></li>
+                <li><a href="#ProteinDetailsSection">Protein Details</a></li>
+                <li><a href="#ModificationDetailsSection">Modification Details</a></li>
+            </ul>
 
-        <!--mode selection dataset 1/2 or comparative mode-->
-        Select Mode:
-        <table id="ModeSelector">
-            <tr>
-                <td>1</td>
-                <td>C</td>
-                <td>2</td>
-            </tr>
-        </table>
+            Links:
+            <ul id="HTMLNavigation">
+                <li><a href="./usage_guide.html">Guide</a></li>
+                <li><a href="./faq.html">FAQ</a></li>
+                <li><a href="./legal_information.html">Legal Information</a></li>
+            </ul>
 
-        <!-- Close Button for the Navigation Menu-->
-        <button id="NavCloseButton" onclick="closeNavBar()">Close</button>
+            <!--mode selection dataset 1/2 or comparative mode-->
+            Select Mode:
+            <table id="ModeSelector">
+                <tr>
+                    <td>1</td>
+                    <td>C</td>
+                    <td>2</td>
+                </tr>
+            </table>
 
-    </nav>
+            <!-- Close Button for the Navigation Menu-->
+            <button id="NavCloseButton" onclick="closeNavBar()">Close</button>
 
-    <!--Button/Image for opening the Side Navigation Bar (transparent - for bg add button around it)-->
-    <img src="../static/resources/logo_lucid_512.png" id="NavOpenButton" onclick="openNavBar()">
+        </nav>
+
+        <!--Button/Image for opening the Side Navigation Bar (transparent - for bg add button around it)-->
+        <img src="../static/resources/logo_lucid_512.png" id="NavOpenButton" onclick="openNavBar()">
+    </div>
 
     <main id="MainContent">
 
