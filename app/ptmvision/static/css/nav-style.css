@@ -54,3 +54,8 @@ Stylesheet specific for the navigation bar
     color: white;
     background-color: black;
 }
+
+main{
+    /*margin-left (0.1% more then width of NavigationButton) -> looks nice*/
+    margin-left: 2.1%;
+}

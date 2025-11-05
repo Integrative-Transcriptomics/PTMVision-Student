@@ -2,12 +2,6 @@ body{
     background-color: lightgray;
 }
 
-main{
-    background-color: red;
-    /*margin-left (0.1% more then width of NavigationButton) -> looks nice*/
-    margin-left: 2.1%;
-}
-
 /*Sections made for Input, Overview, Protein Selection, ...*/
 section{
     margin: 0.5%;
