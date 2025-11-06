@@ -15,11 +15,12 @@ Stylesheet specific for the navigation bar
     position: fixed;
     z-index: 2;
     width: 0;
-    background-color: lightslategray;
+    background-color: #fca75d;
     overflow: hidden;
     height: 50%;
     width: 0%;
     transition: 0.1s;
+    border-radius: 3%;
 }
 
 

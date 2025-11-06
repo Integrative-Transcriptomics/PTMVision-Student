@@ -1,5 +1,5 @@
 body{
-    background-color: lightgray;
+    background-color: #dbdbdb;
 }
 
 /*Sections made for Input, Overview, Protein Selection, ...*/
@@ -7,32 +7,32 @@ section{
     margin: 0.5%;
 }
 
-/*Sections*/
-#AboutSection{
-    background-color: wheat;
-}
-
 /*TODO: Buttons for changing datasets/comparative view*/
 #ModeSelector{
     border: 1px solid black;
 }
 
+/*Sections*/
+#AboutSection{
+    background-color: #969696;
+}
+
 #InputSection{
-    background-color: gray;
+    background-color: #969696;
 }
 
 #OverviewSection{
-    background-color: aqua;
+    background-color: #969696;
 }
 
 #ProteinSelectionSection{
-    background-color: pink;
+    background-color: #969696;
 }
 
 #ProteinDetailsSection{
-    background-color: yellow;
+    background-color: #969696;
 }
 
 #ModificationDetailsSection{
-    background-color: blueviolet;
+    background-color: #969696;
 }
