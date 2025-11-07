@@ -1,4 +1,5 @@
 body{
+    font-family: Arial, system-ui, sans-serif;
     background-color: #dbdbdb;
 }
 
@@ -15,25 +16,25 @@ section{
 
 /*Sections*/
 #AboutSection{
-    background-color: #969696;
+    background-color: #bdbdbd;
 }
 
 #InputSection{
-    background-color: #969696;
+    background-color: #bdbdbd;
 }
 
 #OverviewSection{
-    background-color: #969696;
+    background-color: #bdbdbd;
 }
 
 #ProteinSelectionSection{
-    background-color: #969696;
+    background-color: #bdbdbd;
 }
 
 #ProteinDetailsSection{
-    background-color: #969696;
+    background-color: #bdbdbd;
 }
 
 #ModificationDetailsSection{
-    background-color: #969696;
+    background-color: #bdbdbd;
 }
