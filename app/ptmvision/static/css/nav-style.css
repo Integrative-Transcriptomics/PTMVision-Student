@@ -20,7 +20,7 @@ Stylesheet specific for the navigation bar
     height: 50%;
     width: 0%;
     transition: 0.1s;
-    border-radius: 3%;
+    border-radius: 5px;
 }
 
 
