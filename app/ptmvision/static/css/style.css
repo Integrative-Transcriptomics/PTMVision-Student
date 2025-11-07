@@ -4,7 +4,8 @@ body{
 
 /*Sections made for Input, Overview, Protein Selection, ...*/
 section{
-    margin: 0.5%;
+    margin: 1.5%;
+    width: 95%;
 }
 
 /*TODO: Buttons for changing datasets/comparative view*/
