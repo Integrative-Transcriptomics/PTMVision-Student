@@ -1,5 +1,5 @@
 {
-  "$schema": "PTMVision.schema.json",
+  "$schema": "PTMVision2Sets.schema.json",
   "title": "PTMVision Data Storage Schema",
   "description": "Storage of post-translational modification data with respect to one single protein.",
   "type": "object",
