@@ -27,8 +27,12 @@ Stylesheet specific for the navigation bar
 /*Heading in the navigation block*/
 #NavBlock h1{
     display: block;
+    text-indent: 5%; /*indent for text, looks nicer*/
 }
 
+#NavBlock p{
+    text-indent: 5%; /*indent for text, looks nicer*/
+}
 
 /*All links in the navigation block*/
 #NavBlock a{
