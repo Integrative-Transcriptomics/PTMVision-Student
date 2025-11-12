@@ -9,7 +9,12 @@
     <!-- Stylesheet -->
     <link rel="Stylesheet" href="../static/css/style.css">
     <link rel="Stylesheet" href="../static/css/nav-style.css" <!-- Javascript -->
-    <script src="../static/js/navbar.js"></script>
+    
+    <!-- Scripts -->
+    <script src="../static/js/navbar.js" defer></script>
+    <script src="../static/js/showsections.js"></script>
+
+    <!-- JS-Libraries -->
 
 </head>
 
@@ -107,7 +112,7 @@
             </p>
 
             <!-- Button for sending data for processing to the server -->
-            <button id="SubmitInputButton">Submit</button>
+            <button id="SubmitInputButton" onclick="showOverviewAndProtSelect()">Submit</button>
         </section>
 
         <section id="OverviewSection">
@@ -827,7 +832,7 @@
             </p>
 
 
-            <button id="Confirm Protein Selection Button">Confirm Selection</button>
+            <button id="ConfirmProteinSelectionButton" onclick="showProteinDetails()">Confirm Selection</button>
         </section>
 
         <section id="ProteinDetailsSection">
@@ -844,6 +849,8 @@
                 aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
                 kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </p>
+
+            <button id="ShowModDetailsButton" onclick="showModificationDetails()">Show Modification</button>
         </section>
 
         <section id="ModificationDetailsSection">

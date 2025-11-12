@@ -16,7 +16,7 @@ Stylesheet specific for the navigation bar
     z-index: 2;
     width: 0;
     background-color: #fca75d;
-    overflow: hidden;
+    overflow-x: hidden;
     height: 50%;
     width: 0%;
     transition: 0.1s;

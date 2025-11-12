@@ -25,16 +25,20 @@ section{
 
 #OverviewSection{
     background-color: #bdbdbd;
+    display: none;
 }
 
 #ProteinSelectionSection{
     background-color: #bdbdbd;
+    display: none;
 }
 
 #ProteinDetailsSection{
     background-color: #bdbdbd;
+    display: none;
 }
 
 #ModificationDetailsSection{
     background-color: #bdbdbd;
+    display: none;
 }
