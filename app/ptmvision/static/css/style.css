@@ -23,6 +23,11 @@ section{
     background-color: #bdbdbd;
 }
 
+#input-data-set-2{
+    display: none;
+}
+
+
 #OverviewSection{
     background-color: #bdbdbd;
     display: none;

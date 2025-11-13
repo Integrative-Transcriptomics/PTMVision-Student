@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="../static/js/navbar.js" defer></script>
-    <script src="../static/js/ptmvision-show-hide-elements.js"></script>
+    <script src="../static/js/ptmvision-show-hide-elements.js" defer></script>
     <script src="../static/js/ptmvision-1.1.main.js"></script>
     <script src="../static/js/ptmvision-1.1.global.js"></script>
 
@@ -102,84 +102,163 @@
 
             </p>
 
+            <hr>
             <!-- Select if one or two Datasets should be used here (Comparative on/off)! Effects rendering of the later form part!-->
-            <h4>Use comparative mode with two data sets?</h4>
-            <input type="checkbox" id="dual-mode-switch" name="dual-mode-switch" />
+            <p>Use comparative mode with two data sets?</p>
+            <input type="checkbox" id="dual-mode-switch" name="dual-mode-switch" onclick="inputHider()"/>
+            <hr>
 
             <!-- DATA INPUT FORM HERE: -->
             <!-- TODO: Edit-->
-            <form id="input-data-set-1">
-                <!-- Menu for Data input type selection: 1 Dataset -->
-                <select id="data-type-form" class="mt-2 mb-4 w-75" data-role="select">
-                    <optgroup label="Search Engine">
-                        <option value="ionbot">ionbot</option>
-                        <option value="msfragger">MSFragger</option>
-                        <option value="sage">Sage (Closed Search)</option>
-                        <option value="msms">MaxQuant (Closed Search)</option>
-                        <option value="spectronaut">Spectronaut (PTM Site Report)</option>
-                    </optgroup>
-                    <optgroup label="Other">
-                        <option value="csv">Plain/CSV</option>
-                        <option value="mzid">mzIdentML (.mzid)</option>
-                        <option value="pamod">PeptideAtlas (Modification Matrix)</option>
-                        <option value="infer">Infer/psm_utils</option>
-                    </optgroup>
-                </select>
+            <div id="input-data-container">
 
-                <!-- File upload -->
-                <input id="data-input-form" type="file" data-role="file"/>
+                <!-- INPUT of Dataset 1 -->
+                <form id="input-data-set-1">
+                    <!-- Menu for Data input type selection: Dataset 1 -->
+                    <select id="data-type-form" data-role="select">
+                        <optgroup label="Search Engine">
+                            <option value="ionbot">ionbot</option>
+                            <option value="msfragger">MSFragger</option>
+                            <option value="sage">Sage (Closed Search)</option>
+                            <option value="msms">MaxQuant (Closed Search)</option>
+                            <option value="spectronaut">Spectronaut (PTM Site Report)</option>
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option value="csv">Plain/CSV</option>
+                            <option value="mzid">mzIdentML (.mzid)</option>
+                            <option value="pamod">PeptideAtlas (Modification Matrix)</option>
+                            <option value="infer">Infer/psm_utils</option>
+                        </optgroup>
+                    </select>
+
+                    <!-- File upload -->
+                    <input id="data-input-form" type="file" data-role="file" />
 
 
-                <!-- Exclude Classes -->
-                <!-- TODO: Styling-->
-                <select id="data-excludecls-form"  data-role="select" multiple>
-                    <optgroup label="Other">
-                        <option value="Chemical derivative">Chemical derivative</option>
-                        <option value="Artefact">Artefact</option>
-                        <option value="Synth. pep. protect. gp.">
-                            Synth. pep. protect. gp.
-                        </option>
-                        <option value="Isotopic label">Isotopic label</option>
-                        <option value="Other">Other</option>
-                        <option value="AA substitution">AA substitution</option>
-                        <option value="Unannotated mass shift">
-                            Unannotated mass shift
-                        </option>
-                        <option value="Deprecated unimod entry">
-                            Deprecated unimod entry
-                        </option>
-                        <option value="Non-standard residue">Non-standard residue</option>
-                        <option value="Multiple">Multiple</option>
-                    </optgroup>
-                    <optgroup label="Translational">
-                        <option value="Post-translational">Post-translational</option>
-                        <option value="Co-translational">Co-translational</option>
-                        <option value="Pre-translational">Pre-translational</option>
-                    </optgroup>
-                    <optgroup label="Glycosylation">
-                        <option value="N-linked glycosylation">
-                            N-linked glycosylation
-                        </option>
-                        <option value="O-linked glycosylation">
-                            O-linked glycosylation
-                        </option>
-                        <option value="Other glycosylation">Other glycosylation</option>
-                    </optgroup>
-                    <optgroup label="Cross-Link">
-                        <option value="Cross-link">Cross-link</option>
-                        <option value="CID cleavable cross-link">
-                            CID cleavable cross-link
-                        </option>
-                        <option value="Photo cleavable cross-link">
-                            Photo cleavable cross-link
-                        </option>
-                        <option value="Other cleavable cross-link">
-                            Other cleavable cross-link
-                        </option>
-                    </optgroup>
-                </select>
-            </form>
+                    <!-- Exclude Classes -->
+                    <!-- TODO: Styling-->
+                    <select id="data-excludecls-form" data-role="select" multiple>
+                        <optgroup label="Other">
+                            <option value="Chemical derivative">Chemical derivative</option>
+                            <option value="Artefact">Artefact</option>
+                            <option value="Synth. pep. protect. gp.">
+                                Synth. pep. protect. gp.
+                            </option>
+                            <option value="Isotopic label">Isotopic label</option>
+                            <option value="Other">Other</option>
+                            <option value="AA substitution">AA substitution</option>
+                            <option value="Unannotated mass shift">
+                                Unannotated mass shift
+                            </option>
+                            <option value="Deprecated unimod entry">
+                                Deprecated unimod entry
+                            </option>
+                            <option value="Non-standard residue">Non-standard residue</option>
+                            <option value="Multiple">Multiple</option>
+                        </optgroup>
+                        <optgroup label="Translational">
+                            <option value="Post-translational">Post-translational</option>
+                            <option value="Co-translational">Co-translational</option>
+                            <option value="Pre-translational">Pre-translational</option>
+                        </optgroup>
+                        <optgroup label="Glycosylation">
+                            <option value="N-linked glycosylation">
+                                N-linked glycosylation
+                            </option>
+                            <option value="O-linked glycosylation">
+                                O-linked glycosylation
+                            </option>
+                            <option value="Other glycosylation">Other glycosylation</option>
+                        </optgroup>
+                        <optgroup label="Cross-Link">
+                            <option value="Cross-link">Cross-link</option>
+                            <option value="CID cleavable cross-link">
+                                CID cleavable cross-link
+                            </option>
+                            <option value="Photo cleavable cross-link">
+                                Photo cleavable cross-link
+                            </option>
+                            <option value="Other cleavable cross-link">
+                                Other cleavable cross-link
+                            </option>
+                        </optgroup>
+                    </select>
+                </form>
 
+
+                <!-- INPUT of Dataset 2 -->
+                <form id="input-data-set-2">
+                    <!-- Menu for Data input type selection: Dataset 2 -->
+                    <select id="data-type-form" data-role="select">
+                        <optgroup label="Search Engine">
+                            <option value="ionbot">ionbot</option>
+                            <option value="msfragger">MSFragger</option>
+                            <option value="sage">Sage (Closed Search)</option>
+                            <option value="msms">MaxQuant (Closed Search)</option>
+                            <option value="spectronaut">Spectronaut (PTM Site Report)</option>
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option value="csv">Plain/CSV</option>
+                            <option value="mzid">mzIdentML (.mzid)</option>
+                            <option value="pamod">PeptideAtlas (Modification Matrix)</option>
+                            <option value="infer">Infer/psm_utils</option>
+                        </optgroup>
+                    </select>
+
+                    <!-- File upload -->
+                    <input id="data-input-form" type="file" data-role="file" />
+
+
+                    <!-- Exclude Classes -->
+                    <!-- TODO: Styling-->
+                    <select id="data-excludecls-form" data-role="select" multiple>
+                        <optgroup label="Other">
+                            <option value="Chemical derivative">Chemical derivative</option>
+                            <option value="Artefact">Artefact</option>
+                            <option value="Synth. pep. protect. gp.">
+                                Synth. pep. protect. gp.
+                            </option>
+                            <option value="Isotopic label">Isotopic label</option>
+                            <option value="Other">Other</option>
+                            <option value="AA substitution">AA substitution</option>
+                            <option value="Unannotated mass shift">
+                                Unannotated mass shift
+                            </option>
+                            <option value="Deprecated unimod entry">
+                                Deprecated unimod entry
+                            </option>
+                            <option value="Non-standard residue">Non-standard residue</option>
+                            <option value="Multiple">Multiple</option>
+                        </optgroup>
+                        <optgroup label="Translational">
+                            <option value="Post-translational">Post-translational</option>
+                            <option value="Co-translational">Co-translational</option>
+                            <option value="Pre-translational">Pre-translational</option>
+                        </optgroup>
+                        <optgroup label="Glycosylation">
+                            <option value="N-linked glycosylation">
+                                N-linked glycosylation
+                            </option>
+                            <option value="O-linked glycosylation">
+                                O-linked glycosylation
+                            </option>
+                            <option value="Other glycosylation">Other glycosylation</option>
+                        </optgroup>
+                        <optgroup label="Cross-Link">
+                            <option value="Cross-link">Cross-link</option>
+                            <option value="CID cleavable cross-link">
+                                CID cleavable cross-link
+                            </option>
+                            <option value="Photo cleavable cross-link">
+                                Photo cleavable cross-link
+                            </option>
+                            <option value="Other cleavable cross-link">
+                                Other cleavable cross-link
+                            </option>
+                        </optgroup>
+                    </select>
+                </form>
+            </div>
 
 
             <p>
