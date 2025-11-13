@@ -2942,12 +2942,18 @@ async function startSession() {
     contentType: null,
     content: null,
   };
+  
+  /*
+
+  TODO: Reimplement/Fix referencing errors...
+
   if ($("#data-input-form")[0].files.length == 0) {
     displayAlert("No search engine output data was supplied.");
     $("body").css("cursor", "auto");
     removeNotification();
     return;
   }
+  
 
   const file = $("#data-input-form")[0].files[0];
 
@@ -2982,6 +2988,8 @@ async function startSession() {
       removeNotification();
       displayAlert(error.response.data);
     });
+
+    */
 }
 
 /**
