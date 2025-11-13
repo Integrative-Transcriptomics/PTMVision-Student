@@ -9,11 +9,12 @@
     <!-- Stylesheet -->
     <link rel="Stylesheet" href="../static/css/style.css">
     <link rel="Stylesheet" href="../static/css/nav-style.css" <!-- Javascript -->
-    
+
     <!-- Scripts -->
     <script src="../static/js/navbar.js" defer></script>
-    <script src="../static/js/showsections.js"></script>
+    <script src="../static/js/ptmvision-show-hide-elements.js"></script>
     <script src="../static/js/ptmvision-1.1.main.js"></script>
+    <script src="../static/js/ptmvision-1.1.global.js"></script>
 
     <!-- JS-Libraries -->
 
@@ -28,6 +29,7 @@
 
             <p>Navigation:</p>
             <ul id="SiteNavigation">
+                <!-- TODO: Maybe change to scrollTo function from ptmvision-global.js -->
                 <li><a href="#AboutSection">About</a></li>
                 <li><a href="#InputSection">Input</a></li>
                 <li><a href="#OverviewSection">Overview</a></li>
@@ -84,10 +86,7 @@
                 For selected proteins, investigate detailed information on the occurrence of PTMs along the primary
                 protein sequence and in a spatial structural context.
             </p>
-            <button 
-                class="proceed-button mt-2" 
-                data-role="hint" 
-                data-hint-position="right"
+            <button class="proceed-button mt-2" data-role="hint" data-hint-position="right"
                 data-hint-text="Start an example session with data from the Bio+MedVis Challenge @IEEE VIS 2022"
                 onclick="startExampleSession('ptmvision.example.biomedvis2022.plain')">
                 Try Example
@@ -104,44 +103,93 @@
             </p>
 
             <!-- Select if one or two Datasets should be used here (Comparative on/off)! Effects rendering of the later form part!-->
-            
+            <h4>Use comparative mode with two data sets?</h4>
+            <input type="checkbox" id="dual-mode-switch" name="dual-mode-switch" />
 
             <!-- DATA INPUT FORM HERE: -->
             <!-- TODO: Edit-->
-            <form>
+            <form id="input-data-set-1">
                 <!-- Menu for Data input type selection: 1 Dataset -->
                 <select id="data-type-form" class="mt-2 mb-4 w-75" data-role="select">
-						<optgroup label="Search Engine">
-							<option value="ionbot">ionbot</option>
-							<option value="msfragger">MSFragger</option>
-							<option value="sage">Sage (Closed Search)</option>
-							<option value="msms">MaxQuant (Closed Search)</option>
-							<option value="spectronaut">Spectronaut (PTM Site Report)</option>
-						</optgroup>
-						<optgroup label="Other">
-							<option value="csv">Plain/CSV</option>
-							<option value="mzid">mzIdentML (.mzid)</option>
-							<option value="pamod">PeptideAtlas (Modification Matrix)</option>
-							<option value="infer">Infer/psm_utils</option>
-						</optgroup>
-					</select>
+                    <optgroup label="Search Engine">
+                        <option value="ionbot">ionbot</option>
+                        <option value="msfragger">MSFragger</option>
+                        <option value="sage">Sage (Closed Search)</option>
+                        <option value="msms">MaxQuant (Closed Search)</option>
+                        <option value="spectronaut">Spectronaut (PTM Site Report)</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="csv">Plain/CSV</option>
+                        <option value="mzid">mzIdentML (.mzid)</option>
+                        <option value="pamod">PeptideAtlas (Modification Matrix)</option>
+                        <option value="infer">Infer/psm_utils</option>
+                    </optgroup>
+                </select>
 
+                <!-- File upload -->
+                <input id="data-input-form" class="mt-2 mb-4 w-75" type="file" data-role="file"
+                    data-button-title='<i class="fa-duotone fa-folder-open"></i>' />
+
+
+                <!-- Exclude Classes -->
+                <!-- TODO: Styling-->
+                <select id="data-excludecls-form"  data-role="select" multiple>
+                    <optgroup label="Other">
+                        <option value="Chemical derivative">Chemical derivative</option>
+                        <option value="Artefact">Artefact</option>
+                        <option value="Synth. pep. protect. gp.">
+                            Synth. pep. protect. gp.
+                        </option>
+                        <option value="Isotopic label">Isotopic label</option>
+                        <option value="Other">Other</option>
+                        <option value="AA substitution">AA substitution</option>
+                        <option value="Unannotated mass shift">
+                            Unannotated mass shift
+                        </option>
+                        <option value="Deprecated unimod entry">
+                            Deprecated unimod entry
+                        </option>
+                        <option value="Non-standard residue">Non-standard residue</option>
+                        <option value="Multiple">Multiple</option>
+                    </optgroup>
+                    <optgroup label="Translational">
+                        <option value="Post-translational">Post-translational</option>
+                        <option value="Co-translational">Co-translational</option>
+                        <option value="Pre-translational">Pre-translational</option>
+                    </optgroup>
+                    <optgroup label="Glycosylation">
+                        <option value="N-linked glycosylation">
+                            N-linked glycosylation
+                        </option>
+                        <option value="O-linked glycosylation">
+                            O-linked glycosylation
+                        </option>
+                        <option value="Other glycosylation">Other glycosylation</option>
+                    </optgroup>
+                    <optgroup label="Cross-Link">
+                        <option value="Cross-link">Cross-link</option>
+                        <option value="CID cleavable cross-link">
+                            CID cleavable cross-link
+                        </option>
+                        <option value="Photo cleavable cross-link">
+                            Photo cleavable cross-link
+                        </option>
+                        <option value="Other cleavable cross-link">
+                            Other cleavable cross-link
+                        </option>
+                    </optgroup>
+                </select>
             </form>
 
+
+
             <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
             </p>
 
             <!-- Button for sending data for processing to the server -->
-            <button id="SubmitInputButton" onclick="startSession(); showOverviewAndProtSelect()">Submit</button> <!-- TODO: edit startSession()-->
+            <button id="SubmitInputButton" onclick="startSession(); showOverviewAndProtSelect()">Submit</button>
+            <!-- TODO: edit startSession() [ptmvision-main.js]-->
         </section>
 
         <section id="OverviewSection">

@@ -1,5 +1,5 @@
 /*
-Javascript code for handling html section behavior (showing/hiding)
+Javascript code for handling html behavior (showing/hiding)
 */
 
 
@@ -19,6 +19,16 @@ function showProteinDetails(){
 }
 
 
+//show Modification Details Section
 function showModificationDetails(){
     document.getElementById("ModificationDetailsSection").style.display = "block";
+}
+
+
+
+/*
+Show the correct input and hide the wrong input option when selecting input methods!
+*/
+function inputHider(){
+
 }
