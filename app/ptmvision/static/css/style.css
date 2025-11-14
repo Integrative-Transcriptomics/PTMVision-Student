@@ -47,3 +47,7 @@ section{
     background-color: #bdbdbd;
     display: none;
 }
+
+#input-data-container{
+    display: flex;
+}

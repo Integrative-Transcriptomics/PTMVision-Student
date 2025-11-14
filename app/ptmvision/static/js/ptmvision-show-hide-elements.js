@@ -30,16 +30,18 @@ function showModificationDetails(){
 Show the correct input and hide the wrong input option when selecting input methods!
 */
 function inputHider(){
-    const fstDataSet = document.getElementById("input-data-set-1");
     const sndDataSet = document.getElementById("input-data-set-2");
+    const yLine = document.getElementById("input-data-y-line");
     const modeSwitch = document.getElementById("dual-mode-switch");
 
     if(modeSwitch.checked){
         // mode selector checked -> Enable both data input fields visible
         sndDataSet.style.display = "block";
+        yLine.style.display = "block";
     }else{
         // mode selector unchecked -> only 1 data input field
         sndDataSet.style.display = "none";
+        yLine.style.display = "none";
 
     }
 }
