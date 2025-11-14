@@ -26,6 +26,7 @@ Licensed under GPL-3.0
       Definition of stylesheets to use in the application.
       -->
 	<link rel="stylesheet" type="text/css" href="../static/css/nav-style.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/usage_guide-style.css" />
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/ptmvision-1.1.css')}}" />
 
 	<!-- Scripts -->
@@ -60,7 +61,7 @@ Licensed under GPL-3.0
 	</div>
 
 	<main id="MainContent">
-		<section style="margin: 1.5%;">
+		<section id="content-list-container">
 			<h4>Content</h4>
 			<ol class="content-list">
 				<li onclick="to('about-c1')">
@@ -76,8 +77,10 @@ Licensed under GPL-3.0
 				</li>
 			</ol>
 			<hr />
+		</section>
 
-			<h4 id="about-c1">
+		<section id="about-c1">
+			<h4>
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				I. Starting a PTMVision Session - Input Specification and Supported
 				Formats
@@ -403,8 +406,10 @@ Licensed under GPL-3.0
 				is only relevant for open search data and combines PTMs whose mass shift
 				relative to each other is within the specified tolerance value.
 			</p>
+		</section>
 
-			<h4 id="about-c2" style="margin-top: 2em">
+		<section id="about-c2">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				II. Download Session Data
 			</h4>
@@ -419,8 +424,10 @@ Licensed under GPL-3.0
 				file can be re-uploaded to re-initialize a session and is also intended
 				to easily share results with fellow users.
 			</p>
+		</section>
 
-			<h4 id="about-c3" style="margin-top: 2em">
+		<section id="about-c3">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				III. Available Example Sessions
 			</h4>
@@ -566,8 +573,10 @@ Licensed under GPL-3.0
 					</tr>
 				</tbody>
 			</table>
+		</section>
 
-			<h4 id="about-c4" style="margin-top: 2em">
+		<section id="about-c4">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				IV. Global PTM Overview Visualizations
 			</h4>
@@ -746,8 +755,10 @@ Licensed under GPL-3.0
 						modification class tooltip.</secondary>
 				</span>
 			</div>
+		</section>
 
-			<h4 id="about-c5" style="margin-top: 2em">
+		<section id="about-c5">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				V. Overview Table and Protein Selection
 			</h4>
@@ -791,8 +802,10 @@ Licensed under GPL-3.0
 					">Display</span>
 				button.
 			</p>
+		</section>
 
-			<h4 id="about-c6" style="margin-top: 2em">
+		<section id="about-c6">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				VI. Investigating the PTMs of one Protein in Detail
 			</h4>
@@ -997,26 +1010,26 @@ Licensed under GPL-3.0
 				tracks below the structure model, plotted according to their mass shift
 				in Dalton.
 			</p>
-
-			<hr />
-			<div>
-				<p>If you use this software, please cite it as below:</p>
-				<div class="remark" style="font-family: monospace; font-size: smaller">
-					<p>
-						<i>PTMVision: An Interactive Visualization Webserver for
-							Post-translational Modifications of Proteins</i>
-					</p>
-					<p>
-						Simon Hackl, Caroline Jachmann, Mathias Witte Paz, Theresa Anisja
-						Harbig, Lennart Martens, and Kay Nieselt
-					</p>
-					<p>
-						Journal of Proteome Research 2025 24 (2), 919-928. DOI:
-						<code><a href="10.1021/acs.jproteome.4c00679"
+		</section>
+		<hr />
+		<section id="citation-contact-container">
+			<p>If you use this software, please cite it as below:</p>
+			<div class="remark" style="font-family: monospace; font-size: smaller">
+				<p>
+					<i>PTMVision: An Interactive Visualization Webserver for
+						Post-translational Modifications of Proteins</i>
+				</p>
+				<p>
+					Simon Hackl, Caroline Jachmann, Mathias Witte Paz, Theresa Anisja
+					Harbig, Lennart Martens, and Kay Nieselt
+				</p>
+				<p>
+					Journal of Proteome Research 2025 24 (2), 919-928. DOI:
+					<code><a href="10.1021/acs.jproteome.4c00679"
 								>10.1021/acs.jproteome.4c00679</a
 							></code>
-					</p>
-				</div>
+				</p>
+			</div>
 		</section>
 	</main>
 </body>
