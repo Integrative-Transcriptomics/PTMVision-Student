@@ -13,35 +13,44 @@
     <!-- JS-Libraries -->
     
     <!-- JQuery as requirement + easier js code -->
+    <script src="../static/js/jquery-3.7.1.min.js"></script>
+    <!-- Fontawesome for the looks -->
+    <script src="https://kit.fontawesome.com/df04f22e3d.js"></script>
+    <!-- Apache ECharts for chart display -->
+    <script src="../static/js/echarts-6.0.0.min.js"></script>
+    <!-- Axios for requests -->
+    <script src="../static/js/axios-1.1.2.min.js"></script>
+    <!-- Pako for zlib handling -->
+    <script src="../static/js/pako-2.1.0.min.js"></script>
+
+
+    <!-- Flask style
     <script
 			type="text/javascript"
 			src="{{url_for('static', filename='js/jquery-3.7.1.min.js')}}"
 	></script>
 
-    <!-- Fontawesome for the looks -->
     <script
 			type="text/javascript"
 			src="https://kit.fontawesome.com/df04f22e3d.js"
 			crossorigin="anonymous"
 	></script>
 
-    <!-- Apache ECharts for chart display -->
     <script
 			type="text/javascript"
 			src="{{url_for('static', filename='js/echarts-6.0.0.min.js')}}"
 	></script>
 
-    <!-- Axios for requests -->
     <script
 			type="text/javascript"
 			src="{{url_for('static', filename='js/axios-1.1.2.min.js')}}"
 	></script>
 
-    <!-- Pako for zlib handling -->
     <script
 			type="text/javascript"
 			src="{{url_for('static', filename='js/pako-2.1.0.min.js')}}"
 	></script>
+    -->
 
 
     <!-- Scripts -->
@@ -49,6 +58,29 @@
     <script src="../static/js/ptmvision-1.1.global.js"></script>
     <script src="../static/js/navbar.js"></script>
     <script src="../static/js/ptmvision-show-hide-elements.js" defer></script> <!-- defer required, else null error-->
+
+    <!-- Flask readable style:
+    <script
+			type="text/javascript"
+			src="{{url_for('static', filename='js/ptmvision-1.1.main.js')}}"
+	></script>
+
+    <script
+			type="text/javascript"
+			src="{{url_for('static', filename='js/ptmvision-1.1.global.js')}}"
+	></script>
+
+    <script
+			type="text/javascript"
+			src="{{url_for('static', filename='js/navbar.js')}}"
+	></script>
+
+    <script
+			type="text/javascript"
+			src="{{url_for('static', filename='ptmvision-show-hide-elements.js')}}"
+            defer
+	></script> <!-- defer required, else null error-->
+    -->
 
 </head>
 
