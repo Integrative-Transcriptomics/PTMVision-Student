@@ -24,7 +24,7 @@ var _dashboardContent = null;
 
 
 /**
- *  Dual Data input on/off state.
+ *  Dual Data input on/off state. Off by default.
  */
 var dualMode = false;
 
@@ -2954,6 +2954,7 @@ async function startSession() {
 
   //TODO: Reimplement/Fix errors...
 
+  /*
   // No file input error case:
   if ($("#data-input-form")[0].files.length == 0) {
     displayAlert("No search engine output data was supplied.");
@@ -2962,13 +2963,15 @@ async function startSession() {
     return;
   }
   
-  // save 
+  // save input file via jQuery in file constant:
   const file = $("#data-input-form")[0].files[0];
 
+  // readFile -> file->String, String will be placed in request.content
   await readFile(file).then((response) => {
     request.content = response;
   });
 
+  // fills request meta:
   request.filename = file.name;
   request.contentType = $("#data-type-form")[0].value;
   request.massShiftTolerance = parseFloat($("#data-tolerance-form")[0].value);
@@ -2996,7 +2999,7 @@ async function startSession() {
       removeNotification();
       displayAlert(error.response.data);
     });
-
+  */
     
 }
 
