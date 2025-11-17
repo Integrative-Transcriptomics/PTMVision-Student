@@ -1,0 +1,53 @@
+body{
+    font-family: Arial, system-ui, sans-serif;
+    background-color: #dbdbdb;
+}
+
+/*Sections made for Input, Overview, Protein Selection, ...*/
+section{
+    margin: 1.5%;
+    width: 95%;
+}
+
+/*TODO: Buttons for changing datasets/comparative view*/
+#ModeSelector{
+    border: 1px solid black;
+}
+
+/*Sections*/
+#AboutSection{
+    background-color: #bdbdbd;
+}
+
+#InputSection{
+    background-color: #bdbdbd;
+}
+
+#input-data-set-2{
+    display: none;
+}
+
+
+#OverviewSection{
+    background-color: #bdbdbd;
+    display: none;
+}
+
+#ProteinSelectionSection{
+    background-color: #bdbdbd;
+    display: none;
+}
+
+#ProteinDetailsSection{
+    background-color: #bdbdbd;
+    display: none;
+}
+
+#ModificationDetailsSection{
+    background-color: #bdbdbd;
+    display: none;
+}
+
+#input-data-container{
+    display: flex;
+}

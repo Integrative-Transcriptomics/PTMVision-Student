@@ -5,146 +5,63 @@ Copyright 2023-2024 by Caroline Jachmann and Simon Hackl
 Licensed under GPL-3.0
 -->
 <html>
-	<head>
-		<title>PTMVision | Usage Guide</title>
-		<link
-			rel="icon"
-			type="image/x-icon"
-			href="{{ url_for('static', filename='resources/icon_64') }}"
-		/>
-		<!--
+
+<head>
+	<title>PTMVision | Usage Guide</title>
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='resources/icon_64') }}" />
+	<!--
       Provide meta information about the application.
       -->
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			name="description"
-			content="PTMVision: Interactive Visualization of Post Translational Modifications | Understanding the intricate landscape of post-translational
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="PTMVision: Interactive Visualization of Post Translational Modifications | Understanding the intricate landscape of post-translational
             modifications (PTMs) is crucial for unraveling the complex
             mechanisms underlying cellular processes and diseases. With
             PTMVision, researchers can effortlessly analyze and explore PTM data
             derived from various proteomics search engines, the mzIdentML data
             standard, or from a plain CSV table format processed manually from
-            mass spectrometry (MS) data."
-		/>
-		<meta name="author" content="Caroline Jachmann, Simon Hackl" />
-		<!--
+            mass spectrometry (MS) data." />
+	<meta name="author" content="Caroline Jachmann, Simon Hackl" />
+	<!--
       Definition of stylesheets to use in the application.
       -->
-		<link
-			rel="stylesheet"
-			href="{{url_for('static', filename='css/metro-5.0.0.rc9.min.css')}}"
-		/>
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="{{url_for('static', filename='css/ptmvision-1.1.css')}}"
-		/>
-		<!--
-      Definition of java script files to use in the application.
-      -->
-		<script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/jquery-3.7.1.min.js')}}"
-		></script>
-		<script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/metro-5.0.0.rc9.min.js')}}"
-		></script>
-		<script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/axios-1.1.2.min.js')}}"
-		></script>
-		<script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/ptmvision-1.1.global.js')}}"
-		></script>
-		<script
-			type="text/javascript"
-			src="https://kit.fontawesome.com/df04f22e3d.js"
-			crossorigin="anonymous"
-		></script>
-	</head>
-	<body onload='$("#menu")[0].style.display = "flex";'>
-		<!-- App menu -->
-		<header
-			id="menu"
-			class="app-bar app-bar-expand"
-			data-role="appbar"
-			data-expand="true"
-			data-role-appbar="true"
-		>
-			<img
-				class="brand no-hover"
-				style="height: 80%; cursor: pointer"
-				src="{{ url_for('static', filename='resources/logo_lucid_256.png') }}"
-				alt="The PTMVision logo; Redirects to the applicatios main page by clicking."
-				onclick="redirectTo('', '_self')"
-			/>
-			<h5
-				class="ml-2"
-				style="font-family: monospace; color: var(--color-5); width: 4em"
-			>
-				<i class="fa-light fa-pipe"></i> Usage
-			</h5>
-			<ul class="app-bar-menu">
-				<li
-					data-role="hint"
-					data-hint-text="Redirect to the main page."
-					data-hint-position="bottom"
-					data-hint-offset="10"
-					onclick="redirectTo('', '_self')"
-				>
-					<i class="fa-solid fa-house-blank"></i>
-					Home
-				</li>
-				<li
-					data-role="hint"
-					data-hint-text="Redirect to the usage guide."
-					data-hint-position="bottom"
-					data-hint-offset="10"
-					onclick="redirectTo('usage', '_self')"
-					disabled
-				>
-					<i
-						class="fa-duotone fa-solid fa-book"
-						style="color: var(--background-color-2)"
-					></i>
-					Usage Guide
-				</li>
+	<link rel="stylesheet" type="text/css" href="../static/css/nav-style.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/usage_guide-style.css" />
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/ptmvision-1.1.css')}}" />
 
-				<li
-					data-role="hint"
-					data-hint-text="Redirect to the FAQ page."
-					data-hint-position="bottom"
-					data-hint-offset="10"
-					onclick="redirectTo('faq', '_self')"
-				>
-					<i class="fa-duotone fa-solid fa-question"></i> FAQ
-				</li>
-				<li
-					data-role="hint"
-					data-hint-text="Redirect to the legal information page."
-					data-hint-position="bottom"
-					data-hint-offset="10"
-					onclick="redirectTo('legal', '_self')"
-				>
-					<i class="fa-solid fa-section"></i> Legal Information
-				</li>
-				<li
-					data-role="hint"
-					data-hint-text="Download (binary) session data for re-upload."
-					data-hint-position="bottom"
-					data-hint-offset="10"
-					onclick="downloadSessionData()"
-				>
-					<i class="fa-duotone fa-solid fa-file-arrow-down"></i> Download
-					Session Data
-				</li>
+	<!-- Scripts -->
+	<script src="../static/js/navbar.js" defer></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/ptmvision-1.1.global.js')}}"></script>
+	<!-- JS-Libraries -->
+	<script type="text/javascript" src="https://kit.fontawesome.com/df04f22e3d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<!--Navigation Menu-->
+	<div id="Navigation" class="navigation">
+		<nav id="NavBlock" class="navigation">
+			<h1>PTM Vision</h1>
+
+			Links:
+			<ul id="HTMLNavigation">
+				<li><a href="./usage_guide.html">Guide</a></li>
+				<li><a href="./faq.html">FAQ</a></li>
+				<li><a href="./legal_information.html">Legal Information</a></li>
 			</ul>
-		</header>
 
-		<div class="text-container text-just text-light">
+			<!-- Close Button for the Navigation Menu-->
+			<button id="NavCloseButton" onclick="closeNavBar()">Close</button>
+
+		</nav>
+
+		<!--Button/Image for opening the Side Navigation Bar (transparent - for bg add button around it)-->
+		<a>
+			<img src="../static/resources/icon_64.png" onclick="openNavBar()" id="NavOpenButton">
+		</a>
+	</div>
+
+	<main id="MainContent">
+		<section id="content-list-container">
 			<h4>Content</h4>
 			<ol class="content-list">
 				<li onclick="to('about-c1')">
@@ -160,8 +77,10 @@ Licensed under GPL-3.0
 				</li>
 			</ol>
 			<hr />
+		</section>
 
-			<h4 id="about-c1">
+		<section id="about-c1">
+			<h4>
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				I. Starting a PTMVision Session - Input Specification and Supported
 				Formats
@@ -177,58 +96,45 @@ Licensed under GPL-3.0
 					the input elements <em>Input Format</em>, <em>PTM Data</em>,
 					<em>Exclude UniMod Classes</em> (optional), and
 					<em>Mass Shift Tolerance</em> (optional) and clicking on the
-					<span
-						style="
+					<span style="
 							background-color: #ff6663;
 							padding: 1px;
 							font-size: small;
 							font-weight: normal;
 							border-radius: 4px;
 							color: #fbfbfb;
-						"
-						>Submit</span
-					>
+						">Submit</span>
 					button.
 				</li>
 				<li>
 					<b>Re-upload a previous session</b> by providing a PTMVision session
 					file in the <em>PTMVision Session</em> input and clicking the
-					<span
-						style="
+					<span style="
 							background-color: #ff6663;
 							padding: 1px;
 							font-size: small;
 							font-weight: normal;
 							border-radius: 4px;
 							color: #fbfbfb;
-						"
-						>Submit</span
-					>
+						">Submit</span>
 					button. See section
-					<u onclick="to('about-c2')" style="cursor: pointer"
-						>II. Download Session Data</u
-					>
+					<u onclick="to('about-c2')" style="cursor: pointer">II. Download Session Data</u>
 					for more information on how to download session data.
 				</li>
 				<li>
 					<b>Start an example session</b> via the individual
-					<span
-						style="
+					<span style="
 							background-color: var(--color-3);
 							padding: 1px;
 							font-size: small;
 							font-weight: normal;
 							border-radius: 4px;
 							color: #fbfbfb;
-						"
-						>Start</span
-					>
+						">Start</span>
 					buttons in the example sessions table on panel
 					<i class="fa-duotone fa-circle-1 fa-sm"></i>. Available example
 					sessions are described in section
-					<u onclick="to('about-c3')" style="cursor: pointer"
-						>III. Available Example Sessions</u
-					>
+					<u onclick="to('about-c3')" style="cursor: pointer">III. Available Example Sessions</u>
 				</li>
 			</ul>
 			<div class="remark">
@@ -269,37 +175,25 @@ Licensed under GPL-3.0
 					<b>mzIdentML</b> An exchange standard for peptide and protein
 					identification data, designed by the Proteomics Standards Initiative.
 					Please visit
-					<a href="https://www.psidev.info/mzidentml" target="_blank"
-						>psidev.info</a
-					>
+					<a href="https://www.psidev.info/mzidentml" target="_blank">psidev.info</a>
 					or the original publication
-					<a
-						href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3394945/"
-						target="_blank"
-						><em
-							>'The mzIdentML Data Standard for Mass Spectrometry-Based
-							Proteomics Results', Jones et al., 2012</em
-						></a
-					>
+					<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3394945/" target="_blank"><em>'The mzIdentML
+							Data
+							Standard for Mass Spectrometry-Based
+							Proteomics Results', Jones et al., 2012</em></a>
 					for more information.
 				</li>
 				<li>
 					<b>Infer/psm_utils</b> This is an experimental setting that utilizes
 					the Python package psm_utils to infer PTM data from various formats.
 					Please visit
-					<a href="https://github.com/compomics/psm_utils" target="_blank"
-						>github.com/compomics/psm_utils</a
-					>
+					<a href="https://github.com/compomics/psm_utils" target="_blank">github.com/compomics/psm_utils</a>
 					or the original publication
-					<a
-						href="https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00609"
-						target="_blank"
-						><em
-							>'psm_utils: A High-Level Python API for Parsing and Handling
+					<a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00609" target="_blank"><em>'psm_utils:
+							A
+							High-Level Python API for Parsing and Handling
 							Peptide-Spectrum Matches and Proteomics Search Results', Gabriels
-							et al., 2022</em
-						></a
-					>
+							et al., 2022</em></a>
 					for more information.
 				</li>
 			</ul>
@@ -307,20 +201,14 @@ Licensed under GPL-3.0
 				<i class="fa-duotone fa-solid fa-circle-exclamation"></i> If you can't
 				find a suitable format, feel free to open an issue in the PTMVision
 				GitHub repository
-				<a
-					href="https://github.com/Integrative-Transcriptomics/PTMVision"
-					target="_blank"
-					>github.com/Integrative-Transcriptomics/PTMVision</a
-				>. Example files of the individual supported formats can be downloaded
+				<a href="https://github.com/Integrative-Transcriptomics/PTMVision"
+					target="_blank">github.com/Integrative-Transcriptomics/PTMVision</a>. Example files of the
+				individual supported formats can be downloaded
 				from the PTMVision Zenodo record
-				<a href="https://zenodo.org/records/13270569" , target="_blank"
-					>zenodo.org/records/13270569</a
-				>
+				<a href="https://zenodo.org/records/13270569" , target="_blank">zenodo.org/records/13270569</a>
 				- these files are exactly the files used to set up the example sessions
 				described in section
-				<u onclick="to('about-c3')" style="cursor: pointer"
-					>III. Available Example Sessions</u
-				>.
+				<u onclick="to('about-c3')" style="cursor: pointer">III. Available Example Sessions</u>.
 			</div>
 
 			<h5 style="margin-top: 1em">
@@ -332,10 +220,7 @@ Licensed under GPL-3.0
 				specific formats that are currently available to be uploaded to
 				PTMVision.
 			</p>
-			<table
-				class="table striped mt-2 mb-2 text-left"
-				style="font-size: smaller"
-			>
+			<table class="table striped mt-2 mb-2 text-left" style="font-size: smaller">
 				<thead>
 					<tr>
 						<th>Search Engine</th>
@@ -406,9 +291,8 @@ Licensed under GPL-3.0
 			</table>
 			<p style="font-size: small">
 				* See
-				<a href="https://psm-utils.readthedocs.io/en/v0.6.0/" target="_blank"
-					>psm-utils.readthedocs.io/en/v0.6.0/</a
-				>
+				<a href="https://psm-utils.readthedocs.io/en/v0.6.0/"
+					target="_blank">psm-utils.readthedocs.io/en/v0.6.0/</a>
 				for details.
 			</p>
 			<p style="font-size: small">
@@ -427,11 +311,7 @@ Licensed under GPL-3.0
 			<div class="remark">
 				<i class="fa-duotone fa-solid fa-circle-exclamation"></i> A template
 				file is available
-				<a
-					href="javascript:void(0)"
-					onclick="downloadResource('ptmvision.plain-format.template.csv')"
-					>here</a
-				>.
+				<a href="javascript:void(0)" onclick="downloadResource('ptmvision.plain-format.template.csv')">here</a>.
 			</div>
 			<p>
 				The plain CSV format was implemented to provide users the possibility to
@@ -444,10 +324,7 @@ Licensed under GPL-3.0
 				<em>mass_shift</em> or <em>classification</em> are not provided, they
 				are tried to be inferred from the UniMod ID and the protein sequence.
 			</p>
-			<table
-				class="table striped mt-2 mb-2 text-left"
-				style="font-size: smaller"
-			>
+			<table class="table striped mt-2 mb-2 text-left" style="font-size: smaller">
 				<thead>
 					<tr>
 						<th>Column Name</th>
@@ -529,16 +406,17 @@ Licensed under GPL-3.0
 				is only relevant for open search data and combines PTMs whose mass shift
 				relative to each other is within the specified tolerance value.
 			</p>
+		</section>
 
-			<h4 id="about-c2" style="margin-top: 2em">
+		<section id="about-c2">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				II. Download Session Data
 			</h4>
 			<p>
 				Once a PTMVision session was established, one can download the results
 				in a binary <em>zlib</em> compressed format by clicking on '<i
-					class="fa-duotone fa-file-arrow-down"
-				></i>
+					class="fa-duotone fa-file-arrow-down"></i>
 				Download Session Data' in the header menu on the right. If no session
 				data is yet available, the request will fail with a
 				<code>404</code> status code. The downloaded format is not human
@@ -546,8 +424,10 @@ Licensed under GPL-3.0
 				file can be re-uploaded to re-initialize a session and is also intended
 				to easily share results with fellow users.
 			</p>
+		</section>
 
-			<h4 id="about-c3" style="margin-top: 2em">
+		<section id="about-c3">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				III. Available Example Sessions
 			</h4>
@@ -559,28 +439,21 @@ Licensed under GPL-3.0
 				Sessions' button on panel <i class="fa-duotone fa-circle-1 fa-sm"></i>.
 				From there, example sessions can be started with a single click on the
 				individual
-				<span
-					style="
+				<span style="
 						background-color: #62a8ac;
 						padding: 1px;
 						font-size: small;
 						font-weight: normal;
 						border-radius: 4px;
 						color: #fbfbfb;
-					"
-					>Start</span
-				>
+					">Start</span>
 				buttons in the table. The <em>PTM Data</em> files used to set up the
 				sessions can be downloaded from the PTMVision Zenodo record
-				<a href="https://zenodo.org/records/13270569" , target="_blank"
-					>zenodo.org/records/13270569</a
-				>. An overview of the available example sessions and their respective
+				<a href="https://zenodo.org/records/13270569" , target="_blank">zenodo.org/records/13270569</a>. An
+				overview of the available example sessions and their respective
 				data sources is provided below.
 			</p>
-			<table
-				class="table striped mt-2 mb-2 text-left"
-				style="font-size: smaller"
-			>
+			<table class="table striped mt-2 mb-2 text-left" style="font-size: smaller">
 				<thead>
 					<tr>
 						<th>Search Engine or <em>File Format</em></th>
@@ -597,11 +470,9 @@ Licensed under GPL-3.0
 						<td>Open</td>
 						<td>
 							PRIDE project
-							<a
-								href="https://www.ebi.ac.uk/pride/archive/projects/PXD000498"
-								target="_blank"
-								>PXD000498</a
-							>, LC-MS/MS run of an unenriched <i>Escherichia coli</i> sample.
+							<a href="https://www.ebi.ac.uk/pride/archive/projects/PXD000498"
+								target="_blank">PXD000498</a>, LC-MS/MS run of an unenriched <i>Escherichia coli</i>
+							sample.
 						</td>
 						<td>
 							UniMod classes <i>Artefact</i> and
@@ -614,11 +485,10 @@ Licensed under GPL-3.0
 						<td>Open</td>
 						<td>
 							PRIDE project
-							<a
-								href="https://www.ebi.ac.uk/pride/archive/projects/PXD007740"
-								target="_blank"
-								>PXD007740</a
-							>, LC-MS/MS run of a human colorectal cancer sample enriched for
+							<a href="https://www.ebi.ac.uk/pride/archive/projects/PXD007740"
+								target="_blank">PXD007740</a>, LC-MS/MS run of a human colorectal cancer sample
+							enriched
+							for
 							phosphorylated peptides using Ti<sup>4+</sup>-IMAC.
 						</td>
 						<td>
@@ -633,11 +503,9 @@ Licensed under GPL-3.0
 						<td>Closed</td>
 						<td>
 							PRIDE project
-							<a
-								href="https://www.ebi.ac.uk/pride/archive/projects/PXD000498"
-								target="_blank"
-								>PXD000498</a
-							>, LC-MS/MS run of an unenriched <i>Escherichia coli</i> sample.
+							<a href="https://www.ebi.ac.uk/pride/archive/projects/PXD000498"
+								target="_blank">PXD000498</a>, LC-MS/MS run of an unenriched <i>Escherichia coli</i>
+							sample.
 							Closed search with <i>carbamidomethylation</i> as fixed;
 							<i>oxidation</i> as variable.
 						</td>
@@ -649,11 +517,9 @@ Licensed under GPL-3.0
 						<td>Closed</td>
 						<td>
 							PRIDE project
-							<a
-								href="https://www.ebi.ac.uk/pride/archive/projects/PXD025088"
-								target="_blank"
-								>PXD025088</a
-							>, LC-MS/MS run of an unenriched <i>Escherichia coli</i> sample.
+							<a href="https://www.ebi.ac.uk/pride/archive/projects/PXD025088"
+								target="_blank">PXD025088</a>, LC-MS/MS run of an unenriched <i>Escherichia coli</i>
+							sample.
 							Closed search with <i>carbamidomethylation</i> as fixed;
 							<i>oxidation</i> and <i>protein n-terminal acetylation</i> as
 							variable.
@@ -666,11 +532,9 @@ Licensed under GPL-3.0
 						<td>Not specified</td>
 						<td>
 							MassIVE project
-							<a
-								href="https://massive.ucsd.edu/ProteoSAFe/dataset.jsp?task=6dfcd4ae92a7471a85fa0bf0add8c9bd"
-								target="_blank"
-								>MSV000091214</a
-							>, LC-MS/MS run of an succinyl-enriched mouse kidney sample using
+							<a href="https://massive.ucsd.edu/ProteoSAFe/dataset.jsp?task=6dfcd4ae92a7471a85fa0bf0add8c9bd"
+								target="_blank">MSV000091214</a>, LC-MS/MS run of an succinyl-enriched mouse kidney
+							sample using
 							DC8 and DC12.
 						</td>
 						<td></td>
@@ -680,11 +544,8 @@ Licensed under GPL-3.0
 						<td></td>
 						<td></td>
 						<td>
-							<a
-								href="http://biovis.net/2022/biovisChallenges_vis/"
-								target="_blank"
-								>IEEE VIS 2022 Bio+MedVis Challenge</a
-							>
+							<a href="http://biovis.net/2022/biovisChallenges_vis/" target="_blank">IEEE VIS 2022
+								Bio+MedVis Challenge</a>
 							dataset comprising modifications of three human proteins and their
 							mouse orthologs. PTM analysis carried out with ionbot (open
 							search).
@@ -701,11 +562,9 @@ Licensed under GPL-3.0
 						<td></td>
 						<td>
 							PRIDE project
-							<a
-								href="https://www.ebi.ac.uk/pride/archive/projects/PXD001077"
-								target="_blank"
-								>PXD001077</a
-							>, LC-MS/MS of an unenriched <i>Pyrococcus furiosus</i> sample.
+							<a href="https://www.ebi.ac.uk/pride/archive/projects/PXD001077"
+								target="_blank">PXD001077</a>, LC-MS/MS of an unenriched <i>Pyrococcus furiosus</i>
+							sample.
 							PTM analysis carried out with MS-GF+ v10024 via SearchGUI v1.18.7.
 							Closed search with <i>carbamidomethylation</i> as fixed;
 							<i>oxidation</i> and <i>phosphorylation</i> as variable.
@@ -714,8 +573,10 @@ Licensed under GPL-3.0
 					</tr>
 				</tbody>
 			</table>
+		</section>
 
-			<h4 id="about-c4" style="margin-top: 2em">
+		<section id="about-c4">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				IV. Global PTM Overview Visualizations
 			</h4>
@@ -723,9 +584,9 @@ Licensed under GPL-3.0
 				After successful data processing, users will be presented with a variety
 				of overview visualizations (see the following subsections) and a tabular
 				overview of all proteins in the data (described in section
-				<u onclick="to('about-c5')" style="cursor: pointer"
-					>V. Overview Table and Protein Selection</u
-				>). All overview visualizations have zoom and pan operations, for which
+				<u onclick="to('about-c5')" style="cursor: pointer">V. Overview Table and Protein Selection</u>).
+				All
+				overview visualizations have zoom and pan operations, for which
 				the y-axes of those visualizations that display information per
 				modification are linked, and offer a range of user interactions
 				accessible via the buttons at the top right of panel
@@ -759,23 +620,16 @@ Licensed under GPL-3.0
 				selected threshold.
 			</p>
 			<div class="img-container thumbnail mt-4 mb-4">
-				<video
-					controls="controls"
-					style="width: 100%"
-					name="Video Name"
-					poster="{{ url_for('static', filename='resources/usage_guide_images/overview_2.png') }}"
-				>
-					<source
-						src="{{ url_for('static',
+				<video controls="controls" style="width: 100%" name="Video Name"
+					poster="{{ url_for('static', filename='resources/usage_guide_images/overview_2.png') }}">
+					<source src="{{ url_for('static',
                 filename='resources/usage_guide_movies/Overview_PTMs.webm')
-                }}"
-					/>
+                }}" />
 				</video>
-				<span class="title"
-					><secondary
-						><em>PTM Overview</em>: Tooltips, Highlighting, and Zooming
-					</secondary></span
-				>
+				<span class="title">
+					<secondary><em>PTM Overview</em>: Tooltips, Highlighting, and Zooming
+					</secondary>
+				</span>
 			</div>
 
 			<h5 style="margin-top: 1em">
@@ -793,24 +647,17 @@ Licensed under GPL-3.0
 				will have more shared sites by chance.
 			</p>
 			<div class="img-container thumbnail mt-4 mb-4" style="width: 30%">
-				<video
-					controls="controls"
-					style="width: 100%"
-					name="Video Name"
-					poster="{{ url_for('static', filename='resources/usage_guide_images/Shared_PTM_sites.png') }}"
-				>
-					<source
-						src="{{ url_for('static',
+				<video controls="controls" style="width: 100%" name="Video Name"
+					poster="{{ url_for('static', filename='resources/usage_guide_images/Shared_PTM_sites.png') }}">
+					<source src="{{ url_for('static',
                 filename='resources/usage_guide_movies/shared_sites_zooming.webm')
-                }}"
-					/>
+                }}" />
 				</video>
-				<span class="title"
-					><secondary
-						><em>Shared PTM sites between modification types</em>: Tooltips,
+				<span class="title">
+					<secondary><em>Shared PTM sites between modification types</em>: Tooltips,
 						Highlighting, and Zooming
-					</secondary></span
-				>
+					</secondary>
+				</span>
 			</div>
 			<ul>
 				<li>
@@ -847,24 +694,15 @@ Licensed under GPL-3.0
 				the precursor mass.
 			</p>
 			<div class="img-container thumbnail mt-4 mb-4" style="width: 30%">
-				<video
-					controls="controls"
-					width="600"
-					height="600"
-					name="Video Name"
-					poster="{{ url_for('static', filename='resources/usage_guide_images/Mass_shift.png') }}"
-				>
-					<source
-						src="{{ url_for('static',
+				<video controls="controls" width="600" height="600" name="Video Name"
+					poster="{{ url_for('static', filename='resources/usage_guide_images/Mass_shift.png') }}">
+					<source src="{{ url_for('static',
                 filename='resources/usage_guide_movies/switch_sorting.webm')
-                }}"
-					/>
+                }}" />
 				</video>
-				<span class="title"
-					><secondary
-						><em> Mass shift</em>: Tooltips, Highlighting, Zooming</secondary
-					></span
-				>
+				<span class="title">
+					<secondary><em> Mass shift</em>: Tooltips, Highlighting, Zooming</secondary>
+				</span>
 			</div>
 			<ul>
 				<li>
@@ -885,15 +723,11 @@ Licensed under GPL-3.0
 				these sites are spreaded.
 			</p>
 			<div class="img-container thumbnail mt-4 mb-4" style="width: 30%">
-				<img
-					src="{{ url_for('static', filename='resources/usage_guide_images/Site_Count.png') }}"
-					alt="Example of the Site Count bar chart."
-				/>
-				<span class="title"
-					><secondary
-						>Example of the <em>Site Count</em> bar chart.</secondary
-					></span
-				>
+				<img src="{{ url_for('static', filename='resources/usage_guide_images/Site_Count.png') }}"
+					alt="Example of the Site Count bar chart." />
+				<span class="title">
+					<secondary>Example of the <em>Site Count</em> bar chart.</secondary>
+				</span>
 			</div>
 			<ul>
 				<li>
@@ -914,35 +748,30 @@ Licensed under GPL-3.0
 				modifications.
 			</p>
 			<div class="img-container thumbnail mt-4 mb-4" style="width: 30%">
-				<img
-					src="{{ url_for('static', filename='resources/usage_guide_images/PTM_Class_counts.png') }}"
-					alt="Example of the PTM Class Count bar chart."
-				/>
-				<span class="title"
-					><secondary
-						>Example of the <em>PTM Class Count bar chart</em>, showing the
-						modification class tooltip.</secondary
-					></span
-				>
+				<img src="{{ url_for('static', filename='resources/usage_guide_images/PTM_Class_counts.png') }}"
+					alt="Example of the PTM Class Count bar chart." />
+				<span class="title">
+					<secondary>Example of the <em>PTM Class Count bar chart</em>, showing the
+						modification class tooltip.</secondary>
+				</span>
 			</div>
+		</section>
 
-			<h4 id="about-c5" style="margin-top: 2em">
+		<section id="about-c5">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				V. Overview Table and Protein Selection
 			</h4>
 			<div class="img-container rounded thumbnail mt-4 mb-4">
-				<img
-					src="{{ url_for('static', filename='resources/usage_guide_images/overview_table.png') }}"
-					alt="Display of the protein overview table with the PTM filter applied to oxidation, dioxidation and trioxidation. The protein P0ABB8 is selected."
-				/>
-				<span class="title"
-					><secondary
-						>Display of the protein overview table with the PTM filter applied
+				<img src="{{ url_for('static', filename='resources/usage_guide_images/overview_table.png') }}"
+					alt="Display of the protein overview table with the PTM filter applied to oxidation, dioxidation and trioxidation. The protein P0ABB8 is selected." />
+				<span class="title">
+					<secondary>Display of the protein overview table with the PTM filter applied
 						to <em>oxidation</em>, <em>dioxidation</em> and
 						<em>trioxidation</em>. The protein <em>P0ABB8</em> is
-						selected.</secondary
-					></span
-				>
+						selected.
+					</secondary>
+				</span>
 			</div>
 			<p>
 				The overview table displays all proteins present in the data set (one
@@ -963,21 +792,20 @@ Licensed under GPL-3.0
 				the
 				<em>Detail Visualizations</em> for the corresponding protein can be
 				loaded by clicking on the
-				<span
-					style="
+				<span style="
 						background-color: #ff6663;
 						padding: 1px;
 						font-size: small;
 						font-weight: normal;
 						border-radius: 4px;
 						color: #fbfbfb;
-					"
-					>Display</span
-				>
+					">Display</span>
 				button.
 			</p>
+		</section>
 
-			<h4 id="about-c6" style="margin-top: 2em">
+		<section id="about-c6">
+			<h4 style="margin-top: 2em">
 				<i class="fa-solid fa-bookmark" style="color: var(--highlight-2)"></i>
 				VI. Investigating the PTMs of one Protein in Detail
 			</h4>
@@ -1024,22 +852,16 @@ Licensed under GPL-3.0
 				Modifications View
 			</h5>
 			<div class="img-container rounded thumbnail mt-4 mb-4">
-				<video
-					controls="controls"
-					style="width: 100%"
-					poster="{{ url_for('static', filename='resources/usage_guide_images/dashboard_modifications.png') }}"
-				>
-					<source
-						src="{{ url_for('static',
+				<video controls="controls" style="width: 100%"
+					poster="{{ url_for('static', filename='resources/usage_guide_images/dashboard_modifications.png') }}">
+					<source src="{{ url_for('static',
                   filename='resources/usage_guide_movies/modification_view.webm')
-                  }}"
-					/>
+                  }}" />
 				</video>
-				<span class="title"
-					><secondary
-						>Clip showing how to navigate the <em>Modification dashboard</em>.
-					</secondary></span
-				>
+				<span class="title">
+					<secondary>Clip showing how to navigate the <em>Modification dashboard</em>.
+					</secondary>
+				</span>
 			</div>
 			<p>
 				The <em>Modifications View</em> provides an overview over which
@@ -1071,51 +893,38 @@ Licensed under GPL-3.0
 			</p>
 			<ul>
 				<li>
-					<a
-						href="https://www.uniprot.org/help/disease_phenotypes_variants_section"
-						target="_blank"
-						>Experimental info:
+					<a href="https://www.uniprot.org/help/disease_phenotypes_variants_section"
+						target="_blank">Experimental info:
 					</a>
 					Information on the disease(s), phenotype(s), and variants associated
 					with the protein
 				</li>
 				<li>
-					<a href="https://www.uniprot.org/help/binding" target="_blank"
-						>Sites:
+					<a href="https://www.uniprot.org/help/binding" target="_blank">Sites:
 					</a>
 					Information on the interaction between protein residues and chemical
 					entities (e.g. metals, cofactors)
 				</li>
 				<li>
-					<a
-						href="https://www.uniprot.org/help/family_and_domains_section"
-						target="_blank"
-						>Region:
+					<a href="https://www.uniprot.org/help/family_and_domains_section" target="_blank">Region:
 					</a>
 					Sequence similarities with other proteins and the domain(s) present in
 					the protein
 				</li>
 				<li>
-					<a
-						href="https://www.uniprot.org/help/structure_section"
-						target="_blank"
-						>Secondary Structure:
+					<a href="https://www.uniprot.org/help/structure_section" target="_blank">Secondary Structure:
 					</a>
 					Information on the secondary structure elements within the protein
 				</li>
 				<li>
-					<a
-						href="https://www.uniprot.org/help/disease_phenotypes_variants_section"
-						target="_blank"
-						>Amino Acid Modifications:
+					<a href="https://www.uniprot.org/help/disease_phenotypes_variants_section" target="_blank">Amino
+						Acid Modifications:
 					</a>
 					Post-translational modifications (PTMs) and/or processing events
 				</li>
 				<li>
-					<a
-						href="https://www.uniprot.org/help/disease_phenotypes_variants_section"
-						target="_blank"
-						>Molecule Processing:
+					<a href="https://www.uniprot.org/help/disease_phenotypes_variants_section" target="_blank">Molecule
+						Processing:
 					</a>
 					Information on the disease(s), phenotype(s), and variants associated
 					with the protein
@@ -1136,20 +945,15 @@ Licensed under GPL-3.0
 				Structure View
 			</h5>
 			<div class="img-container rounded thumbnail mt-4 mb-4">
-				<video
-					controls="controls"
-					style="width: 100%"
-					poster="{{ url_for('static', filename='resources/usage_guide_images/dashboard_structure.png') }}"
-				>
+				<video controls="controls" style="width: 100%"
+					poster="{{ url_for('static', filename='resources/usage_guide_images/dashboard_structure.png') }}">
 					<source
-						src="{{ url_for('static', filename='resources/usage_guide_movies/structure_view.webm') }}"
-					/>
+						src="{{ url_for('static', filename='resources/usage_guide_movies/structure_view.webm') }}" />
 				</video>
-				<span class="title"
-					><secondary
-						>Clip showing how to navigate the <em>Structure dashboard</em>.
-					</secondary></span
-				>
+				<span class="title">
+					<secondary>Clip showing how to navigate the <em>Structure dashboard</em>.
+					</secondary>
+				</span>
 			</div>
 			<p>
 				Clicking the <i class="fa-duotone fa-repeat"></i> switch button on the
@@ -1206,31 +1010,28 @@ Licensed under GPL-3.0
 				tracks below the structure model, plotted according to their mass shift
 				in Dalton.
 			</p>
-
-			<hr />
-			<div>
-				<p>If you use this software, please cite it as below:</p>
-				<div class="remark" style="font-family: monospace; font-size: smaller">
-					<p>
-						<i
-							>PTMVision: An Interactive Visualization Webserver for
-							Post-translational Modifications of Proteins</i
-						>
-					</p>
-					<p>
-						Simon Hackl, Caroline Jachmann, Mathias Witte Paz, Theresa Anisja
-						Harbig, Lennart Martens, and Kay Nieselt
-					</p>
-					<p>
-						Journal of Proteome Research 2025 24 (2), 919-928. DOI:
-						<code
-							><a href="10.1021/acs.jproteome.4c00679"
+		</section>
+		<hr />
+		<section id="citation-contact-container">
+			<p>If you use this software, please cite it as below:</p>
+			<div class="remark" style="font-family: monospace; font-size: smaller">
+				<p>
+					<i>PTMVision: An Interactive Visualization Webserver for
+						Post-translational Modifications of Proteins</i>
+				</p>
+				<p>
+					Simon Hackl, Caroline Jachmann, Mathias Witte Paz, Theresa Anisja
+					Harbig, Lennart Martens, and Kay Nieselt
+				</p>
+				<p>
+					Journal of Proteome Research 2025 24 (2), 919-928. DOI:
+					<code><a href="10.1021/acs.jproteome.4c00679"
 								>10.1021/acs.jproteome.4c00679</a
-							></code
-						>
-					</p>
-				</div>
+							></code>
+				</p>
 			</div>
-		</div>
-	</body>
+		</section>
+	</main>
+</body>
+
 </html>

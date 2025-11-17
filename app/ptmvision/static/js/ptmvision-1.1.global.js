@@ -22,11 +22,15 @@ function redirectTo(pageName, target) {
  * @param {String} text The text to display in the notification.
  */
 function displayNotification(text) {
+  //TODO: fix selector + rebuild
+
+  /*
   $("#menu").append(
     `<div class='notification'><i class="fa-duotone fa-spinner-third fa-spin fa-2xl"></i> ` +
       text +
       `</div>`
   );
+  */
 }
 
 /**
