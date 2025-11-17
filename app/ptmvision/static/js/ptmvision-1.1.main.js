@@ -21,6 +21,13 @@ var _dashboardChart = null;
  */
 var _dashboardContent = null;
 
+
+
+/**
+ *  Dual Data input on/off state.
+ */
+var dualMode = false;
+
 /**
  * ECharts option for global axis style.
  */
@@ -2943,10 +2950,11 @@ async function startSession() {
     content: null,
   };
   
-  /*
+  
 
-  TODO: Reimplement/Fix referencing errors...
+  //TODO: Reimplement/Fix errors...
 
+  // No file input error case:
   if ($("#data-input-form")[0].files.length == 0) {
     displayAlert("No search engine output data was supplied.");
     $("body").css("cursor", "auto");
@@ -2954,7 +2962,7 @@ async function startSession() {
     return;
   }
   
-
+  // save 
   const file = $("#data-input-form")[0].files[0];
 
   await readFile(file).then((response) => {
@@ -2989,7 +2997,7 @@ async function startSession() {
       displayAlert(error.response.data);
     });
 
-    */
+    
 }
 
 /**
