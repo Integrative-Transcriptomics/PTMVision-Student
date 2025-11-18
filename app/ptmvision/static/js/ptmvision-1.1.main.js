@@ -28,6 +28,29 @@ var _dashboardContent = null;
  */
 var dualMode = false;
 
+
+
+
+/**
+ *  Activate/Deactivate dualMode Variable.
+ *  Should get executed when hitting the checkbox!
+ */
+function changeDualMode(){
+  if(dualMode === true){
+    // Dual Mode active -> Deactivate
+    dualMode = false;
+
+  }else if(dualMode === false){
+    // Dual Mode inactive -> Activate
+    dualMode = true;
+
+  }else{
+    // ERROR CASE... should not happen...
+    // TODO: Delete???
+    console.log("This should not be displayed... Impossible case!")
+  }
+}
+
 /**
  * ECharts option for global axis style.
  */
