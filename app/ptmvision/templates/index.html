@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheet -->
-    <link rel="Stylesheet" href="../static/css/style.css">
-    <link rel="Stylesheet" href="../static/css/nav-style.css" <!-- Javascript -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/nav-style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/select2.min.css">
 
+    <!-- Javascript -->
     <!-- JS-Libraries -->
     
     <!-- JQuery as requirement + easier js code -->
     <script src="../static/js/jquery-3.7.1.min.js"></script>
+    <!-- Select2 for multi select -->
+    <script src="../static/js/select2.min.js"></script>
     <!-- Fontawesome for the looks -->
     <script src="https://kit.fontawesome.com/df04f22e3d.js"></script>
     <!-- Apache ECharts for chart display -->
@@ -63,6 +67,7 @@
     <script src="../static/js/ptmvision-1.1.main.js"></script>
     <script src="../static/js/ptmvision-1.1.global.js"></script>
     <script src="../static/js/navbar.js"></script>
+    <script src="../static/js/select2-display.js"></script>
     <script src="../static/js/ptmvision-show-hide-elements.js" defer></script> <!-- defer required, else null error-->
 
     <!-- Flask readable style:
@@ -203,13 +208,14 @@
                         </optgroup>
                     </select>
 
+                    <br>
                     <!-- File upload Dataset 1 -->
                     <input id="data-input-form" type="file" data-role="file" />
-
+                    <br>
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
-                    <select id="data-excludecls-form" data-role="select" multiple>
+                    <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select" multiple="multiple">
                         <optgroup label="Other">
                             <option value="Chemical derivative">Chemical derivative</option>
                             <option value="Artefact">Artefact</option>
@@ -278,13 +284,14 @@
                         </optgroup>
                     </select>
 
+                    <br>
                     <!-- File upload Dataset 2 -->
                     <input id="data-input-form-2" type="file" data-role="file" />
-
+                    <br>
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
-                    <select id="data-excludecls-form" data-role="select" multiple>
+                    <select id="data-excludecls-form-set-2" class="data-excludecls-form-class" data-role="select" multiple="multiple">
                         <optgroup label="Other">
                             <option value="Chemical derivative">Chemical derivative</option>
                             <option value="Artefact">Artefact</option>

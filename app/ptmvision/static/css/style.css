@@ -51,3 +51,22 @@ section{
 #input-data-container{
     display: flex;
 }
+
+
+/*
+Important for correct select 2 multi select display:
+*/
+.select2-results__option {
+
+  white-space: nowrap;
+
+}
+
+/*
+Important for correct select 2 multi select display:
+*/
+.select2.select2-container {
+
+  width: 100% !important;
+
+}
