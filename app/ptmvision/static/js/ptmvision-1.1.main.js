@@ -32,12 +32,12 @@ var dualMode = false;
  *  Activate/Deactivate dualMode Variable.
  *  Should get executed when hitting the checkbox!
  */
-function changeDualMode(){
-  if(dualMode === true){
+function changeDualMode() {
+  if (dualMode === true) {
     // Dual Mode active -> Deactivate
     dualMode = false;
   }
-  if(dualMode === false){
+  if (dualMode === false) {
     // Dual Mode inactive -> Activate
     dualMode = true;
   }
@@ -354,7 +354,7 @@ class OverviewChart {
         formatter: (params) => {
           let name =
             this.#data.modificationNamesSorted[this.#sortingIndex][
-              params.data.value
+            params.data.value
             ];
           return this.#data.modifications[name].display_name;
         },
@@ -701,11 +701,11 @@ class OverviewChart {
           if (params.seriesIndex == 0) {
             let yModName =
               this.#data.modificationNamesSorted[this.#sortingIndex][
-                params.data[1]
+              params.data[1]
               ];
             let xModName =
               this.#data.modificationNamesSorted[this.#sortingIndex][
-                params.data[0]
+              params.data[0]
               ];
             return (
               "<code>" +
@@ -757,35 +757,35 @@ class OverviewChart {
       visualMap: [
         dataCoOccurrence.length > 0
           ? {
-              type: "continuous",
-              seriesIndex: [0],
-              inRange: {
-                color: [
-                  "#dddddd",
-                  "#cccccc",
-                  "#888888",
-                  "#666666",
-                  "#444444",
-                  "#222222",
-                  "#000000",
-                ],
-              },
-              outOfRange: {
-                color: ["#444444"],
-              },
-              min: 1,
-              max: Math.max(...Object.values(this.#data.coOccurrence)),
-              orient: "horizontal",
-              top: 54,
-              left: "10%",
-              itemHeight: 50,
-              itemWidth: 11,
-              text: [
-                Math.max(...Object.values(this.#data.coOccurrence)),
-                "No. shared sites 1",
+            type: "continuous",
+            seriesIndex: [0],
+            inRange: {
+              color: [
+                "#dddddd",
+                "#cccccc",
+                "#888888",
+                "#666666",
+                "#444444",
+                "#222222",
+                "#000000",
               ],
-              textStyle: { fontWeight: "normal", fontSize: 12 },
-            }
+            },
+            outOfRange: {
+              color: ["#444444"],
+            },
+            min: 1,
+            max: Math.max(...Object.values(this.#data.coOccurrence)),
+            orient: "horizontal",
+            top: 54,
+            left: "10%",
+            itemHeight: 50,
+            itemWidth: 11,
+            text: [
+              Math.max(...Object.values(this.#data.coOccurrence)),
+              "No. shared sites 1",
+            ],
+            textStyle: { fontWeight: "normal", fontSize: 12 },
+          }
           : null,
       ],
       dataZoom: [
@@ -1725,7 +1725,7 @@ class DashboardChart {
       if (aminoacidIndex != undefined) {
         let countAndClass =
           this.#data.aminoacidCounts[this.#aminoAcids3[aminoacidIndex]][
-            this.#data.modifications[modificationIndex]
+          this.#data.modifications[modificationIndex]
           ];
         contentHead +=
           "has " +
@@ -1776,7 +1776,7 @@ class DashboardChart {
         contentBody += `<hr /><b>PTM class counts</b></br>`;
         for (const [cls, count] of Object.entries(
           this.#data.modificationCounts[
-            this.#data.modifications[modificationIndex]
+          this.#data.modifications[modificationIndex]
           ]
         )) {
           noData = false;
@@ -1786,7 +1786,7 @@ class DashboardChart {
       }
       return contentHead + contentBody;
     };
-    this.chart.instance.on("click", () => {});
+    this.chart.instance.on("click", () => { });
   }
 
   /**
@@ -2368,8 +2368,8 @@ class DashboardChart {
         delete this.#data.positions[position];
         console.warn(
           "Delete modifications data at position " +
-            position +
-            "; Position exceeds the sequence length or is smaller than one."
+          position +
+          "; Position exceeds the sequence length or is smaller than one."
         );
       }
     }
@@ -2378,8 +2378,8 @@ class DashboardChart {
         delete this.#data.contacts[position];
         console.warn(
           "Delete contacts data at position " +
-            position +
-            "; Position exceeds the sequence length."
+          position +
+          "; Position exceeds the sequence length."
         );
       }
       for (const [contact, _] of Object.entries(entries)) {
@@ -2387,10 +2387,10 @@ class DashboardChart {
           delete this.#data.contacts[position][contact];
           console.warn(
             "Delete contact at position " +
-              position +
-              " to position " +
-              contact +
-              "; Position exceeds the sequence length."
+            position +
+            " to position " +
+            contact +
+            "; Position exceeds the sequence length."
           );
         }
       }
@@ -2816,9 +2816,9 @@ class StructureView {
       );
       $("#panel-dashboard-structure-meta").html(
         `<i class="fa-solid fa-circle fa-sm"></i> Highlight positions with modifications: ` +
-          this.#highlightModifications
-            .map((_) => "<code>" + _ + "</code>")
-            .join(", ")
+        this.#highlightModifications
+          .map((_) => "<code>" + _ + "</code>")
+          .join(", ")
       );
       $("#panel-dashboard-structure-meta").show();
     } else {
@@ -2900,8 +2900,8 @@ function startExampleSession(fileIdentifier) {
   axios
     .get(
       window.location.origin +
-        "/example_session?fileIdentifier=" +
-        fileIdentifier
+      "/example_session?fileIdentifier=" +
+      fileIdentifier
     )
     .then((_) => {
       clearCharts();
@@ -2958,34 +2958,92 @@ async function startExistingSession() {
  */
 async function startSession() {
   displayNotification("Transfer and process entered data.");
-  request = {
-    massShiftTolerance: 0.001,
-    excludeClasses: [],
-    contentType: null,
-    content: null,
-  };
-  
-  
 
-  //TODO: Reimplement/Fix errors...
+
+
+
+  if (dualMode == false) {
+    // case: dual mode is disabled -> normal 1 file session
+
+    // No file input error case:
+    if ($("#data-input-form-1")[0].files.length == 0) {
+      displayAlert("No search engine output data was supplied.");
+      $("body").css("cursor", "auto");
+      removeNotification();
+      return;
+    }
+
+    //define request:
+    request = {
+      massShiftTolerance: 0.001,
+      excludeClasses: [],
+      contentType: null,
+      content: null,
+    };
+
+
+    // save input file via jQuery in file constant (data file 1):
+    const file = $("#data-input-form-1")[0].files[0];
+
+
+    // readFile -> file->String, String will be placed in request.content
+    await readFile(file).then((response) => {
+      request.content = response;
+    });
+
+
+    // fill request meta:
+    // TODO:
+
+
+  } else if (dualMode == true) {
+    // case: dual mode enabled -> 2 file session
+
+    // No file input error cases:
+    if ($("#data-input-form-1")[0].files.length == 0) {
+      displayAlert("No search engine output data was supplied for file 1");
+      $("body").css("cursor", "auto");
+      removeNotification();
+
+      //DEBUG:
+      console.log("Missing Data input 1 case");
+
+      return;
+    }
+    if ($("#data-input-form-2")[0].files.length == 0) {
+      displayAlert("No search engine output data was supplied for file 2");
+      $("body").css("cursor", "auto");
+      removeNotification();
+
+      //DEBUG:
+      console.log("Missing Data input 2 case");
+
+      return;
+    }
+
+    request = {
+      massShiftTolerance: 0.001,
+      excludeClasses: [],
+      //TODO:
+    }
+
+    // save input file via jQuery in file constant (data file 1):
+    const file = $("#data-input-form-1")[0].files[0];
+    // file 2 for dualMode:
+    const file2 = $("#data-input-form-2")[0].files[0];
+
+
+    // readfile
+    // TODO:
+
+    // fill request meta:
+    // TODO:
+
+  }
+
+
 
   /*
-  // No file input error case:
-  if ($("#data-input-form")[0].files.length == 0) {
-    displayAlert("No search engine output data was supplied.");
-    $("body").css("cursor", "auto");
-    removeNotification();
-    return;
-  }
-  
-  // save input file via jQuery in file constant:
-  const file = $("#data-input-form")[0].files[0];
-
-  // readFile -> file->String, String will be placed in request.content
-  await readFile(file).then((response) => {
-    request.content = response;
-  });
-
   // fills request meta:
   request.filename = file.name;
   request.contentType = $("#data-type-form")[0].value;
@@ -3015,7 +3073,7 @@ async function startSession() {
       displayAlert(error.response.data);
     });
   */
-    
+
 }
 
 /**
@@ -3032,6 +3090,9 @@ function readFile(file) {
     };
     fileReader.onerror = (error) => reject(error);
     fileReader.readAsText(file);
+
+    //Debug
+    //console.log(fileReader)
   });
 }
 
@@ -3072,8 +3133,8 @@ function overviewTableInitialize(afterResponse) {
       );
       $("#panel-table-title").html(
         "Select single protein of interest (" +
-          response.data.length +
-          " available)"
+        response.data.length +
+        " available)"
       );
       if (afterResponse != undefined) afterResponse();
     })
@@ -3230,20 +3291,20 @@ function dashboardChartInitialize(
           "proteinDescription"
         )
           ? response.data.annotation.proteinDescription.hasOwnProperty(
-              "recommendedName"
-            )
+            "recommendedName"
+          )
             ? response.data.annotation.proteinDescription.recommendedName
-                .fullName.value
+              .fullName.value
             : Object.values(response.data.annotation.proteinDescription)[0][0]
-                .fullName.value
+              .fullName.value
           : "N/A";
         let organismName = response.data.annotation.hasOwnProperty("organism")
           ? "<em>" + response.data.annotation.organism.scientificName + "</em>"
           : "N/A";
         $("#panel-dashboard-selection").html(
           "Selected Protein: <u>" +
-            [primaryAccession, proteinName, organismName].join(" | ") +
-            "</u> (Click for UniProt Information)"
+          [primaryAccession, proteinName, organismName].join(" | ") +
+          "</u> (Click for UniProt Information)"
         );
         $("#panel-dashboard-selection").css("cursor", "pointer");
         $("#panel-dashboard-selection").on("click", () =>
