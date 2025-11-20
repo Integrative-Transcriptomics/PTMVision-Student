@@ -2989,8 +2989,32 @@ async function startSession() {
     });
 
 
-    // fill request meta:
-    // TODO:
+    // fills request meta:
+    request.filename = file.name;
+    request.contentType = $("#data-type-form")[0].value;
+    request.massShiftTolerance = parseFloat($("#data-tolerance-form")[0].value);
+    //TODO: Exclude Classes
+    request.excludeClasses = null;
+    axios
+      .post(
+        window.location.origin + "/process_search_engine_output",
+        pako.deflate(JSON.stringify(request)),
+        {
+          headers: {
+            "Content-Type": "application/octet-stream",
+            "Content-Encoding": "zlib",
+          },
+        }
+      )
+      .then((_) => {
+        clearCharts();
+        overviewTableInitialize(overviewChartInitialize); // Init. table and chart.
+      })
+      .catch((error) => {
+        console.error(error);
+        removeNotification();
+        displayAlert(error.response.data);
+      });
 
 
   } else if (dualMode == true) {
@@ -3034,8 +3058,15 @@ async function startSession() {
     const file2 = $("#data-input-form-2")[0].files[0];
 
 
-    // readfile
-    // TODO:
+    // readfile for dual Mode:
+    await readFile(file).then((response) => {
+      request.content1 = response;
+    });
+
+    await readFile(file2).then((response) => {
+      request.content2 = response;
+    });
+
 
     // fill request meta:
     // TODO:
