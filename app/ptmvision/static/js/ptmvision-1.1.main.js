@@ -2959,9 +2959,6 @@ async function startExistingSession() {
 async function startSession() {
   displayNotification("Transfer and process entered data.");
 
-
-
-
   if (dualMode == false) {
     // case: dual mode is disabled -> normal 1 file session
 
@@ -3023,8 +3020,12 @@ async function startSession() {
 
     request = {
       massShiftTolerance: 0.001,
-      excludeClasses: [],
-      //TODO:
+      excludeClasses1: [],
+      excludeClasses2: [],
+      contentType1: null,
+      contentType2: null,
+      content1: null,
+      content2: null,
     }
 
     // save input file via jQuery in file constant (data file 1):
