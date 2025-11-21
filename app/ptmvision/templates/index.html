@@ -13,7 +13,7 @@
 
     <!-- Javascript -->
     <!-- JS-Libraries -->
-    
+
     <!-- JQuery as requirement + easier js code -->
     <script src="../static/js/jquery-3.7.1.min.js"></script>
     <!-- Select2 for multi select -->
@@ -120,14 +120,11 @@
             </ul>
 
             <!--mode selection dataset 1/2 or comparative mode-->
-            <p>Select Mode:</p>
-            <table id="ModeSelector">
-                <tr>
-                    <td>1</td>
-                    <td>C</td>
-                    <td>2</td>
-                </tr>
-            </table>
+            <div id="DualModeViewSelector">
+                <button id="ViewSelectorLeft" class="ViewSelectorButton">1</button>
+                <button id="ViewSelectorMiddle" class="ViewSelectorButton">C</button>
+                <button id="ViewSelectorRight" class="ViewSelectorButton">2</button>
+            </div>
 
             <!-- Close Button for the Navigation Menu-->
             <button id="NavCloseButton" onclick="closeNavBar()">Close</button>
@@ -181,7 +178,7 @@
             <hr>
             <!-- Select if one or two Datasets should be used here (Comparative on/off)! Effects rendering of the later form part!-->
             <p>Use comparative mode with two data sets?</p>
-            <input type="checkbox" id="dual-mode-switch" name="dual-mode-switch" onclick="inputHider()"/>
+            <input type="checkbox" id="dual-mode-switch" name="dual-mode-switch" onclick="inputHider(); showDualModeViewSelector()" />
             <hr>
 
             <!-- DATA INPUT FORM HERE: -->
@@ -214,7 +211,8 @@
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
-                    <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select" multiple="multiple">
+                    <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select"
+                        multiple="multiple">
                         <optgroup label="Other">
                             <option value="Chemical derivative">Chemical derivative</option>
                             <option value="Artefact">Artefact</option>
@@ -290,7 +288,8 @@
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
-                    <select id="data-excludecls-form-set-2" class="data-excludecls-form-class" data-role="select" multiple="multiple">
+                    <select id="data-excludecls-form-set-2" class="data-excludecls-form-class" data-role="select"
+                        multiple="multiple">
                         <optgroup label="Other">
                             <option value="Chemical derivative">Chemical derivative</option>
                             <option value="Artefact">Artefact</option>

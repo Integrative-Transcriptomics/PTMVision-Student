@@ -3,6 +3,31 @@ Javascript code for handling html behavior (showing/hiding)
 */
 
 
+/**
+ * Show/Hide the DualModeViewSelector in the Navigation Menu
+ * Default Off -> Turn On when dualMode == true
+ */
+function showDualModeViewSelector(){
+    selector = document.getElementById("DualModeViewSelector");
+
+    console.log(dualMode);
+    
+    if(dualMode == true){
+        selector.style.display = "flex";
+    }else{
+        selector.style.display = "none";
+    }
+}
+
+/**
+ * General function for showing/hiding Elements function
+ * @param id (id of the element)
+ */
+function showHideElementOnClick(id){
+
+}
+
+
 //show PTM Overview Section and Protein Selection Section
 function showOverviewAndProtSelect(){
     overview = document.getElementById("OverviewSection");

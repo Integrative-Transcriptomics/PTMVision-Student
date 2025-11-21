@@ -9,10 +9,45 @@ section{
     width: 95%;
 }
 
-/*TODO: Buttons for changing datasets/comparative view*/
-#ModeSelector{
-    border: 1px solid black;
+/*Buttons for changing datasets/comparative view + Container*/
+#DualModeViewSelector{
+    display: none;
+    font-size: 0px;
+    align-items: center;
+    justify-content: center;
 }
+
+.ViewSelectorButton{
+    background-color: rgb(150, 159, 167);
+    margin-left: -1px;
+    margin-right: -1px;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    font-size: large;
+}
+
+.ViewSelectorButton:hover{
+    background-color: rgb(159, 162, 196);
+}
+
+.ViewSelectorButton#ViewSelectorLeft{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    width: 20%;
+}
+
+.ViewSelectorButton#ViewSelectorMiddle{
+    width: 20%;
+}
+
+.ViewSelectorButton#ViewSelectorRight{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 20%;
+}
+
+
 
 /*Sections*/
 #AboutSection{
