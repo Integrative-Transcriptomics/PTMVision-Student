@@ -13,7 +13,7 @@ function showDualModeViewSelector(){
     console.log(dualMode);
     
     if(dualMode == true){
-        selector.style.display = "block";
+        selector.style.display = "flex";
     }else{
         selector.style.display = "none";
     }
