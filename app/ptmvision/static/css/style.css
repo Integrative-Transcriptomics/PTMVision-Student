@@ -10,7 +10,8 @@ section{
 }
 
 /*TODO: Buttons for changing datasets/comparative view*/
-#ModeSelector{
+#DualModeViewSelector{
+    display: none;
     border: 1px solid black;
 }
 
