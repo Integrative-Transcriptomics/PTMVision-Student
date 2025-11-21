@@ -26,7 +26,7 @@ var _dashboardContent = null;
 /**
  *  Dual Data input on/off state. Off by default.
  */
-var dualMode = true;
+var dualMode = false;
 
 /**
  * ECharts option for global axis style.
