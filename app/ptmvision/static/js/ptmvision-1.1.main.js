@@ -2991,7 +2991,7 @@ async function startSession() {
 
     // fills request meta:
     request.filename = file.name;
-    request.contentType = $("#data-type-form")[0].value;
+    request.contentType = $("#data-type-form-1")[0].value;
     request.massShiftTolerance = parseFloat($("#data-tolerance-form")[0].value);
     //TODO: Exclude Classes
     request.excludeClasses = null;
@@ -3053,13 +3053,13 @@ async function startSession() {
     }
 
     // save input file via jQuery in file constant (data file 1):
-    const file = $("#data-input-form-1")[0].files[0];
+    const file1 = $("#data-input-form-1")[0].files[0];
     // file 2 for dualMode:
     const file2 = $("#data-input-form-2")[0].files[0];
 
 
     // readfile for dual Mode:
-    await readFile(file).then((response) => {
+    await readFile(file1).then((response) => {
       request.content1 = response;
     });
 
@@ -3070,6 +3070,11 @@ async function startSession() {
 
     // fill request meta:
     // TODO:
+    request.filename1 = file1.name;
+    request.filename2 = file2.name;
+    request.contentType1 = $("#data-type-form-1")[0].value;
+    request.contentType2 = $("#data-type-form-2")[0].value;
+
 
   }
 
