@@ -3074,7 +3074,8 @@ async function startSession() {
     request.filename2 = file2.name;
     request.contentType1 = $("#data-type-form-1")[0].value;
     request.contentType2 = $("#data-type-form-2")[0].value;
-
+    request.massShiftTolerance1 = parseFloat($("#data-tolerance-form")[0].value);
+    request.massShiftTolerance2 = parseFloat()
 
   }
 

@@ -90,8 +90,8 @@
 			type="text/javascript"
 			src="{{url_for('static', filename='ptmvision-show-hide-elements.js')}}"
             defer
-	></script> <!-- defer required, else null error-->
-    -->
+	></script> defer required, else null error-->
+    
 
 </head>
 
@@ -213,6 +213,12 @@
                     <input id="data-input-form-1" type="file" data-role="file" />
                     <br>
 
+                    <!-- Mass shift tolerance 1 -->
+                    <label for="data-tolerance-form-1">
+                        Mass Shift Tolerance
+                    </label>
+                    <input id="data-tolerance-form-1" name="data-tolerance-form-1" type="number" min="0" max="10" step="0.001" value="0.001"/>
+
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
                     <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select" multiple="multiple">
@@ -288,6 +294,12 @@
                     <!-- File upload Dataset 2 -->
                     <input id="data-input-form-2" type="file" data-role="file" />
                     <br>
+
+                    <!-- Mass shift tolerance 2 -->
+                    <label for="data-tolerance-form-2">
+                        Mass Shift Tolerance
+                    </label>
+                    <input id="data-tolerance-form-2" name="data-tolerance-form-2" type="number" min="0" max="10" step="0.001" value="0.001"/>
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
