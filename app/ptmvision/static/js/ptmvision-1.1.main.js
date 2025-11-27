@@ -2972,6 +2972,7 @@ async function startSession() {
 
     //define request:
     request = {
+      dual: false,
       massShiftTolerance: 0.001,
       excludeClasses: [],
       contentType: null,
@@ -3048,6 +3049,7 @@ async function startSession() {
 
     // Define request - Dual
     request = {
+      dual: true,
       massShiftTolerance: 0.001,
       excludeClasses1: [],
       excludeClasses2: [],
@@ -3092,20 +3094,7 @@ async function startSession() {
     request.excludeClasses2 = $("#data-excludecls-form-set-2").select2("data");
 
     // Axios POST request:
-    // TODO
-  }
-
-
-  /*
-  // fills request meta:
-  request.filename = file.name;
-  request.contentType = $("#data-type-form")[0].value;
-  request.massShiftTolerance = parseFloat($("#data-tolerance-form")[0].value);
-  request.excludeClasses = Metro.getPlugin(
-    "#data-excludecls-form",
-    "select"
-  ).val();
-  axios
+    axios
     .post(
       window.location.origin + "/process_search_engine_output",
       pako.deflate(JSON.stringify(request)),
@@ -3125,8 +3114,7 @@ async function startSession() {
       removeNotification();
       displayAlert(error.response.data);
     });
-  */
-
+  }
 }
 
 /**
