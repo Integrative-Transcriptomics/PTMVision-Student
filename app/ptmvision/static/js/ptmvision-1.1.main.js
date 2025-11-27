@@ -2992,9 +2992,13 @@ async function startSession() {
     // fills request meta:
     request.filename = file.name;
     request.contentType = $("#data-type-form-1")[0].value;
-    request.massShiftTolerance = parseFloat($("#data-tolerance-form")[0].value);
+    request.massShiftTolerance = parseFloat($("#data-tolerance-form-1")[0].value);
+    
     //TODO: Exclude Classes
     request.excludeClasses = null;
+    
+    
+    // Axios Post Request with request content
     axios
       .post(
         window.location.origin + "/process_search_engine_output",
@@ -3042,6 +3046,7 @@ async function startSession() {
       return;
     }
 
+    // Define request - Dual
     request = {
       massShiftTolerance: 0.001,
       excludeClasses1: [],
@@ -3069,14 +3074,25 @@ async function startSession() {
 
 
     // fill request meta:
-    // TODO:
+
+    // Filenames - Dual
     request.filename1 = file1.name;
     request.filename2 = file2.name;
+
+    // File Content - Dual
     request.contentType1 = $("#data-type-form-1")[0].value;
     request.contentType2 = $("#data-type-form-2")[0].value;
-    request.massShiftTolerance1 = parseFloat($("#data-tolerance-form")[0].value);
-    request.massShiftTolerance2 = parseFloat()
 
+    // Mass Shift Tolerance - Dual
+    request.massShiftTolerance1 = parseFloat($("#data-tolerance-form-1")[0].value);
+    request.massShiftTolerance2 = parseFloat($("#data-tolerance-form-2")[0].value);
+
+    // Excluded Classes - Dual
+    request.excludeClasses1 = null;
+    request.excludeClasses2 = null;
+
+    // Axios POST request:
+    // TODO
   }
 
 
