@@ -2994,8 +2994,8 @@ async function startSession() {
     request.contentType = $("#data-type-form-1")[0].value;
     request.massShiftTolerance = parseFloat($("#data-tolerance-form-1")[0].value);
     
-    //TODO: Exclude Classes
-    request.excludeClasses = null;
+    //Exclude Classes
+    request.excludeClasses = $("#data-excludecls-form-set-1").select2("data");
     
     
     // Axios Post Request with request content
@@ -3088,8 +3088,8 @@ async function startSession() {
     request.massShiftTolerance2 = parseFloat($("#data-tolerance-form-2")[0].value);
 
     // Excluded Classes - Dual
-    request.excludeClasses1 = null;
-    request.excludeClasses2 = null;
+    request.excludeClasses1 = $("#data-excludecls-form-set-1").select2("data");
+    request.excludeClasses2 = $("#data-excludecls-form-set-2").select2("data");
 
     // Axios POST request:
     // TODO
