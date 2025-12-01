@@ -3109,13 +3109,38 @@ async function startSession() {
     )
     .then((_) => {
       clearCharts();
-      overviewTableInitialize(overviewChartInitialize); // Init. table and chart.
+      //overviewTableInitialize(overviewChartInitialize); // Init. table and chart. TODO
     })
     .catch((error) => {
       console.error(error);
       removeNotification();
       displayAlert(error.response.data);
     });
+
+
+
+    // Axios POST request 2:
+    axios
+    .post(
+      window.location.origin + "/process_search_engine_output-2",
+      pako.deflate(JSON.stringify(request2)),
+      {
+        headers: {
+          "Content-Type": "application/octet-stream",
+          "Content-Encoding": "zlib",
+        },
+      }
+    )
+    .then((_) => {
+      clearCharts();
+      //overviewTableInitialize(overviewChartInitialize); // Init. table and chart. TODO
+    })
+    .catch((error) => {
+      console.error(error);
+      removeNotification();
+      displayAlert(error.response.data);
+    });
+
   }
 }
 
