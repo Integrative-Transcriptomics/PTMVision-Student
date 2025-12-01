@@ -2972,7 +2972,6 @@ async function startSession() {
 
     //define request:
     request = {
-      dual: false,
       massShiftTolerance: 0.001,
       excludeClasses: [],
       contentType: null,
@@ -3047,16 +3046,19 @@ async function startSession() {
       return;
     }
 
-    // Define request - Dual
+    // Define request - Dual with 2 requests
     request = {
-      dual: true,
       massShiftTolerance: 0.001,
-      excludeClasses1: [],
-      excludeClasses2: [],
-      contentType1: null,
-      contentType2: null,
-      content1: null,
-      content2: null,
+      excludeClasses: [],
+      contentType: null,
+      content: null,
+    }
+
+    request2 = {
+      massShiftTolerance: 0.001,
+      excludeClasses: [],
+      contentType: null,
+      content: null,
     }
 
     // save input file via jQuery in file constant (data file 1):
@@ -3067,31 +3069,31 @@ async function startSession() {
 
     // readfile for dual Mode:
     await readFile(file1).then((response) => {
-      request.content1 = response;
+      request.content = response;
     });
 
     await readFile(file2).then((response) => {
-      request.content2 = response;
+      request2.content = response;
     });
 
 
     // fill request meta:
 
     // Filenames - Dual
-    request.filename1 = file1.name;
-    request.filename2 = file2.name;
+    request.filename = file1.name;
+    request2.filename = file2.name;
 
     // File Content - Dual
-    request.contentType1 = $("#data-type-form-1")[0].value;
-    request.contentType2 = $("#data-type-form-2")[0].value;
+    request.contentType = $("#data-type-form-1")[0].value;
+    request2.contentType = $("#data-type-form-2")[0].value;
 
     // Mass Shift Tolerance - Dual
-    request.massShiftTolerance1 = parseFloat($("#data-tolerance-form-1")[0].value);
-    request.massShiftTolerance2 = parseFloat($("#data-tolerance-form-2")[0].value);
+    request.massShiftTolerance = parseFloat($("#data-tolerance-form-1")[0].value);
+    request2.massShiftTolerance = parseFloat($("#data-tolerance-form-2")[0].value);
 
     // Excluded Classes - Dual
-    request.excludeClasses1 = $("#data-excludecls-form-set-1").select2("data");
-    request.excludeClasses2 = $("#data-excludecls-form-set-2").select2("data");
+    request.excludeClasses = $("#data-excludecls-form-set-1").select2("data");
+    request2.excludeClasses = $("#data-excludecls-form-set-2").select2("data");
 
     // Axios POST request:
     axios
