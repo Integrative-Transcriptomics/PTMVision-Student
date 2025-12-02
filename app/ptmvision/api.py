@@ -36,7 +36,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=1)
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SECRET_KEY"] = os.getenv("SIGNER")
 app.config["SESSION_CACHELIB"] = FileSystemCache(cache_dir = BASEPATH + '/session/', threshold=0)
-app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024  # Limit content lengths to 50 MB.
+app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024  # Limit content lengths to 100 MB.
 
 """ Set API parameters. """
 DEBUG = os.getenv("DEBUG")

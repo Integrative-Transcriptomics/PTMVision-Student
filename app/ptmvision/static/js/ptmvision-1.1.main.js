@@ -3012,8 +3012,14 @@ async function startSession() {
         }
       )
       .then((_) => {
-        clearCharts();
-        overviewTableInitialize(overviewChartInitialize); // Init. table and chart.
+        
+        //Debuging:
+        console.log("POST Req 1 DS works");
+
+
+        //Todo
+        //clearCharts();
+        //overviewTableInitialize(overviewChartInitialize); // Init. table and chart.
       })
       .catch((error) => {
         console.error(error);
@@ -3106,13 +3112,21 @@ async function startSession() {
       }
     )
     .then((_) => {
-      clearCharts();
-      overviewTableInitialize(overviewChartInitialize); // Init. table and chart.
+      
+      //DEBUG:
+      console.log("POST Request Dual Mode works!");
+
+
+      //TODO
+      //clearCharts();
+      //overviewTableInitialize(overviewChartInitialize); // Init. table and chart.
     })
     .catch((error) => {
       console.error(error);
-      removeNotification();
-      displayAlert(error.response.data);
+      
+      //Todo
+      //removeNotification();
+      //displayAlert(error.response.data);
     });
   }
 }
