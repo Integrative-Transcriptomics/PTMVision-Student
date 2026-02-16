@@ -1,0 +1,7 @@
+header{
+    background-color: gray;
+    display: flex;
+    height: 60px;
+    position: sticky;
+    top: 0;
+}
