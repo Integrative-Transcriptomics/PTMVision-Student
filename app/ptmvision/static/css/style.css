@@ -9,7 +9,7 @@ section{
     width: 95%;
 }
 
-/*TODO: Buttons for changing datasets/comparative view*/
+/*TODO: Buttons for changing datasets/comparative view -> in dual-mode-button-style.css */
 #ModeSelector{
     border: 1px solid black;
 }

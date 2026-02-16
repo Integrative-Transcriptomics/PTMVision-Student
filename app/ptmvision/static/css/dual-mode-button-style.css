@@ -1,0 +1,42 @@
+
+
+/* Container for the view select buttons */
+#ViewSelector{
+    background-color: gray;
+    font-size: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#LeftViewSelButton{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    width: 10%;
+}
+
+#RightViewSelButton{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 10%;
+}
+
+#MiddleViewSelButton{
+    width: 15%;
+}
+
+
+.ViewSelButtons{
+    background-color: rgb(129, 131, 155);
+    margin-left: -1px;
+    margin-right: -1px;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    font-size: large;
+}
+
+.ViewSelButtons:hover{
+    background-color: rgb(159, 162, 196);
+}
+

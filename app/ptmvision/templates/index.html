@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
     <link rel="stylesheet" type="text/css" href="../static/css/nav-style.css">
     <link rel="stylesheet" type="text/css" href="../static/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/dual-mode-button-style.css">
 
     <!-- Javascript -->
     <!-- JS-Libraries -->
@@ -122,13 +123,11 @@
 
             <!--mode selection dataset 1/2 or comparative mode-->
             <p>Select Mode:</p>
-            <table id="ModeSelector">
-                <tr>
-                    <td>1</td>
-                    <td>C</td>
-                    <td>2</td>
-                </tr>
-            </table>
+            <div id="ViewSelector">
+                <button class="ViewSelButtons" id="LeftViewSelButton">1</button>
+                <button class="ViewSelButtons" id="MiddleViewSelButton">C</button>
+                <button class="ViewSelButtons" id="RightViewSelButton">2</button>
+            </div>
 
             <!-- Close Button for the Navigation Menu-->
             <button id="NavCloseButton" onclick="closeNavBar()">Close</button>
