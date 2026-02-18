@@ -22,27 +22,6 @@ var _dashboardChart = null;
 var _dashboardContent = null;
 
 
-
-/**
- *  Dual Data input on/off state. Off by default.
- */
-var dualMode = false;
-
-/**
- *  Activate/Deactivate dualMode Variable.
- *  Should get executed when hitting the checkbox!
- */
-function changeDualMode() {
-  if (dualMode === true) {
-    // Dual Mode active -> Deactivate
-    dualMode = false;
-  }
-  if (dualMode === false) {
-    // Dual Mode inactive -> Activate
-    dualMode = true;
-  }
-}
-
 /**
  * ECharts option for global axis style.
  */

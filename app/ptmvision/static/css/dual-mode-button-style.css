@@ -1,4 +1,4 @@
-
+/* Buttons in the sidebar menu */
 
 /* Container for the view select buttons */
 #ViewSelector{
@@ -39,4 +39,3 @@
 .ViewSelButtons:hover{
     background-color: rgb(159, 162, 196);
 }
-

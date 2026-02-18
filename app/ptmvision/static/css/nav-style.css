@@ -3,6 +3,11 @@ Stylesheet specific for the navigation bar
 */
 
 
+#Navigation img{
+    margin-top: 0.5%;
+}
+
+
 /*The button (image) for opening the navigation menu*/
 #NavOpenButton{
     position: fixed;
@@ -21,6 +26,7 @@ Stylesheet specific for the navigation bar
     width: 0%;
     transition: 0.1s;
     border-radius: 5px;
+    margin-top: 0.5%;
 }
 
 

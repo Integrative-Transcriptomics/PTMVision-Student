@@ -32,16 +32,16 @@ Show the correct input and hide the wrong input option when selecting input meth
 function inputHider(){
     const sndDataSet = document.getElementById("input-data-set-2");
     const yLine = document.getElementById("input-data-y-line");
-    const modeSwitch = document.getElementById("dual-mode-switch");
+    const modeSwitch = document.getElementById("DualmodeSwitch");
 
-    if(modeSwitch.checked){
-        // mode selector checked -> Enable both data input fields visible
-        sndDataSet.style.display = "block";
-        yLine.style.display = "block";
-    }else{
-        // mode selector unchecked -> only 1 data input field
+    if(_dualMode){
+        // dual mode disabled -> Enable both data input fields visible
         sndDataSet.style.display = "none";
         yLine.style.display = "none";
+    }else{
+        // dual mode disabled -> only 1 data input field
+        sndDataSet.style.display = "block";
+        yLine.style.display = "block";
 
     }
 }

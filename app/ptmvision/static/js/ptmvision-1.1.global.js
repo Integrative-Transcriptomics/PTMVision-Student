@@ -24,13 +24,13 @@ function redirectTo(pageName, target) {
 function displayNotification(text) {
   //TODO: fix selector + rebuild
 
-  /*
-  $("#menu").append(
+  
+  $("#HeaderSecError").append(
     `<div class='notification'><i class="fa-duotone fa-spinner-third fa-spin fa-2xl"></i> ` +
       text +
       `</div>`
   );
-  */
+  
 }
 
 /**

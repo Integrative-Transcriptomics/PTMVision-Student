@@ -66,10 +66,11 @@
 
 
     <!-- Scripts -->
-    <script src="../static/js/ptmvision-1.1.main.js"></script>
-    <script src="../static/js/ptmvision-1.1.global.js"></script>
-    <script src="../static/js/navbar.js"></script>
+    <script src="../static/js/ptmvision-1.1.main.js" defer></script>
+    <script src="../static/js/ptmvision-1.1.global.js" defer></script>
+    <script src="../static/js/navbar.js" defer></script>
     <script src="../static/js/select2-display.js"></script>
+    <script src="../static/js/ptmvision-dualmode.js"defer></script>
     <script src="../static/js/ptmvision-show-hide-elements.js" defer></script> <!-- defer required, else null error-->
 
     <!-- Flask readable style:
@@ -101,18 +102,37 @@
 
     <!-- Header for notifications and dual mode status -->
     <header>
-        <section id="HeaderSec1" class="HeaderSec"></section>
-        <section id="HeaderSec1" class="HeaderSec"></section>
-        <section id="HeaderSec1" class="HeaderSec"></section>
-        <section id="HeaderSec1" class="HeaderSec"></section>
-        <section id="HeaderSec1" class="HeaderSec"></section>
+        <section id="HeaderSecLogo" class="headerSec">
+            <!-- PTM VISION LOGO HERE -->
+             <img src="../static/resources/logo_lucid_512_text.png" alt="PTMVision logo text line">
+        </section>
+        <section id="HeaderSecError" class="headerSec">
+            <!-- Should be used to display error messanges -->
+            <!-- TODO! -->
+             <p></p>
+        </section>
+        <section id="HeaderSecSpace" class="headerSec">
+            <!-- Works as a Spacer Section -->
+        </section>
+        <section id="HeaderSecDataset" class="headerSec">
+            <!-- Display the currently selected dataset if dual mode is on -->
+             <p>
+                Selected View
+             </p>
+        </section>
+        <section id="HeaderSecDualStatus" class="headerSec">
+            <!-- Display the dual mode status (on/off) -->
+             <p>Dual Mode</p>
+             <div id="DualModeStatusDot">
+                <!-- Displays the status of dual mode through a colored (red = off, green = on) dot -->
+             </div>
+        </section>
     </header>
 
 
     <!--Navigation Menu-->
     <div id="Navigation" class="navigation">
         <nav id="NavBlock" class="navigation">
-            <h1>PTM Vision</h1>
 
             <p>Navigation:</p>
             <ul id="SiteNavigation">
@@ -192,7 +212,7 @@
             <hr>
             <!-- Select if one or two Datasets should be used here (Comparative on/off)! Effects rendering of the later form part!-->
             <p>Use comparative mode with two data sets?</p>
-            <input type="checkbox" id="dual-mode-switch" name="dual-mode-switch" onclick="inputHider(); changeDualMode()"/>
+            <input type="checkbox" id="DualmodeSwitch" onclick="inputHider(); dualModeChangeState()"/>
             <hr>
 
             <!-- DATA INPUT FORM HERE: -->

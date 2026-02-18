@@ -1,7 +1,68 @@
 header{
     background-color: gray;
-    display: flex;
     height: 60px;
+    display: flex;
+    flex-wrap: nowrap;
     position: sticky;
     top: 0;
+}
+
+.headerSec {
+    display: flex;  
+    height: 60px;
+    align-self: center;
+
+    /*text setting: */
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-weight: bold;
+    
+}
+
+#HeaderSecLogo {
+    width: 15%;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#HeaderSecError {
+
+    color: red;
+    /*Settings for the positioning of the error msg*/
+    justify-content: center;
+    align-items: center;
+}
+
+
+#HeaderSecSpace {
+    width: 450%;
+}
+
+#HeaderSecDataset {
+    justify-content: flex-end;
+
+    /*Settings for the positioning of the dataset display*/
+    justify-content: center;
+    align-items: center;
+}
+
+#HeaderSecDualStatus {
+    /*container settings: */
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#HeaderSecDualStatus p{
+    /*alignment settings: */
+    align-self: center;
+    justify-content: center;
+}
+
+#DualModeStatusDot{
+    height: 15px;
+    width: 80%;
+    background-color: #FF3636; /*turn this green or red depending if dual mode is enabled or disabled*/
+    align-self: center;
+    
 }
