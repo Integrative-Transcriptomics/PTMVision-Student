@@ -48,9 +48,6 @@ function dualModeSetOff() {
  * Sends dual mode state information to the backend
  */
 function dualModeSendState() {
-    //_dualMode
-    // axios com
-    //TODO
     /*
     try{
         const {data} = await axios({
