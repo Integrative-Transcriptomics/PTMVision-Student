@@ -102,18 +102,15 @@ function dualModeChangeState() {
     if ((dualModeGetState() === false) || (_dualMode == undefined)) {
         // dual mode was enabled and get disabled now
         dualModeSetOn();
-
-        dualModeSendState();
-        dualModeChangeDisplay();
     }else if(dualModeGetState() === true){
         // dual mode was disabled and get enabled now
         dualModeSetOff();
-
-        dualModeSendState();
-        dualModeChangeDisplay();
     }else{
         console.error("reached unreachable state of dualmode...");
     }
+    
+    dualModeChangeDisplay();
+    dualModeSendState();
 }
 
 
