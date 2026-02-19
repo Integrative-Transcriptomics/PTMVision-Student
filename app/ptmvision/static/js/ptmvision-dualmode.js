@@ -70,7 +70,7 @@ function dualModeChangeDisplay() {
         // Dual mode disabled case
         
         // change color of dual mode indicator
-        dualStatusDisplay.style.backgroundColor = "red";
+        dualStatusDisplay.style.backgroundColor = "#FF0000";
         
         // Header "Selected View" field
         datasetDisplayContainer.style.display = "none";
@@ -122,33 +122,6 @@ function dualModeChangeState() {
         console.error("reached unreachable state of dualmode...");
     }
     console.log(_dualMode);
-}
-
-
-function dualModeHeaderCtl() {
-    if (dualModeGetState() == false) {
-
-        // no dataset display, because dual mode off
-        datasetDisplay.style.display = "none";
-
-        // dual mode display shows off
-        dualStatusDisplay.style.backgroundColor = "red";
-
-        // TODO: hide sidebar dataset selector
-    }
-
-    if (_dualMode == true) {
-        // set dataset display
-        datasetDisplay.style.display = "flex"; // TODO: check if flex is here really needed...
-
-        // dual mode display shows on
-        dualStatusDisplay.style.backgroundColor = "green";
-
-        // show currently selected dataset!
-        // TODO! (datasetDisplay)
-
-        // TODO: show sidebar dataset selector
-    }
 }
 
 
