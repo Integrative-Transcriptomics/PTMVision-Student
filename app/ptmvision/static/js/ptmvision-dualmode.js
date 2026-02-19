@@ -19,6 +19,7 @@ const yLine = document.getElementById("input-data-y-line");
  */
 var _dualMode = false;
 
+axios.post();
 
 /***
  * Gets the state of _dualMode (boolean)
@@ -48,19 +49,29 @@ function dualModeSetOff() {
  * Sends dual mode state information to the backend
  */
 function dualModeSendState() {
-    /*
-    try{
-        const {data} = await axios({
-            method: "put",
-            url: "/dualModeStatus",
-            data: {
-                dualmode: dualModeGetState() // returns true or false...
-            }
-        })
-    }catch (err){
-        console.log("Error while sending dual mode status to server! Error code: " + err.response.status);
+    
+    // must be executed when pressing submit button!!!
+
+    switch(dualModeGetState()){
+        case true:
+            console.log("True status");
+            axios.put(
+                "/dualmodestatus",
+                {
+                    title: "DualModeStatus",
+                    description: "DualMode = True",
+                    content
+                }
+            )
+            break;
+        case false:
+            console.log("False status");
+            break;
     }
-    */
+
+
+
+    console.log("Error while sending dual mode status to server! Error code: ");
 }
 
 /**
@@ -121,7 +132,7 @@ function dualModeChangeState() {
     }
 
     dualModeChangeDisplay();
-    dualModeSendState();
+    dualModeSendState(); // TODO: remove later!!! (keep for now for debugging)
 }
 
 
