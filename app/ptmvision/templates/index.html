@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/ptmvision-mainstyle.css">
     <link rel="stylesheet" type="text/css" href="../static/css/nav-style.css">
     <link rel="stylesheet" type="text/css" href="../static/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/dual-mode-button-style.css">
@@ -15,7 +15,7 @@
 
     <!-- Javascript -->
     <!-- JS-Libraries -->
-    
+
     <!-- JQuery as requirement + easier js code -->
     <script src="../static/js/jquery-3.7.1.min.js"></script>
     <!-- Select2 for multi select -->
@@ -70,7 +70,8 @@
     <script src="../static/js/ptmvision-1.1.global.js" defer></script>
     <script src="../static/js/navbar.js" defer></script>
     <script src="../static/js/select2-display.js"></script>
-    <script src="../static/js/ptmvision-dualmode.js"defer></script>
+    <script src="../static/js/ptmvision-dualmode.js" defer></script>
+    <script src="../static/js/ptmvision-selectview.js" defer></script>
     <script src="../static/js/ptmvision-show-hide-elements.js" defer></script> <!-- defer required, else null error-->
 
     <!-- Flask readable style:
@@ -94,7 +95,7 @@
 			src="{{url_for('static', filename='ptmvision-show-hide-elements.js')}}"
             defer
 	></script> defer required, else null error-->
-    
+
 
 </head>
 
@@ -104,28 +105,35 @@
     <header>
         <section id="HeaderSecLogo" class="headerSec">
             <!-- PTM VISION LOGO HERE -->
-             <img src="../static/resources/logo_lucid_512_text.png" alt="PTMVision logo text line">
+            <img src="../static/resources/logo_lucid_512_text.png" alt="PTMVision logo text line">
         </section>
         <section id="HeaderSecError" class="headerSec">
             <!-- Should be used to display error messanges -->
             <!-- TODO! -->
-             <p></p>
+            <p></p>
         </section>
         <section id="HeaderSecSpace" class="headerSec">
             <!-- Works as a Spacer Section -->
         </section>
         <section id="HeaderSecDataset" class="headerSec">
             <!-- Display the currently selected dataset if dual mode is on -->
-             <p>
-                Selected View
-             </p>
+            <div id="HeaderSecDSTextContainer">
+                <p>
+                    Selected View
+                </p>
+                <div id="Selection">
+                    <p>
+                        Comparative
+                    </p>
+                </div>
+            </div>
         </section>
         <section id="HeaderSecDualStatus" class="headerSec">
             <!-- Display the dual mode status (on/off) -->
-             <p>Dual Mode</p>
-             <div id="DualModeStatusDot">
+            <p>Dual Mode</p>
+            <div id="DualModeStatusDot">
                 <!-- Displays the status of dual mode through a colored (red = off, green = on) dot -->
-             </div>
+            </div>
         </section>
     </header>
 
@@ -134,7 +142,7 @@
     <div id="Navigation" class="navigation">
         <nav id="NavBlock" class="navigation">
 
-            <p>Navigation:</p>
+            <h3>Navigation:</h3>
             <ul id="SiteNavigation">
                 <!-- TODO: Maybe change to scrollTo function from ptmvision-global.js -->
                 <li><a href="#AboutSection">About</a></li>
@@ -145,7 +153,7 @@
                 <li><a href="#ModificationDetailsSection">Modification Details</a></li>
             </ul>
 
-            <p>Links:</p>
+            <h3>Links:</h3>
             <ul id="HTMLNavigation">
                 <li><a href="./usage_guide.html">Guide</a></li>
                 <li><a href="./faq.html">FAQ</a></li>
@@ -153,11 +161,11 @@
             </ul>
 
             <!--mode selection dataset 1/2 or comparative mode-->
-            <p>Select Mode:</p>
+            <h3 id="ViewSelectorHeading">Select Mode:</h3>
             <div id="ViewSelector">
-                <button class="ViewSelButtons" id="LeftViewSelButton">1</button>
-                <button class="ViewSelButtons" id="MiddleViewSelButton">C</button>
-                <button class="ViewSelButtons" id="RightViewSelButton">2</button>
+                <button class="ViewSelButtons" id="LeftViewSelButton" onclick="selectView('1');">1</button>
+                <button class="ViewSelButtons" id="MiddleViewSelButton" onclick="selectView('C');">C</button>
+                <button class="ViewSelButtons" id="RightViewSelButton" onclick="selectView('2');">2</button>
             </div>
 
             <!-- Close Button for the Navigation Menu-->
@@ -212,7 +220,7 @@
             <hr>
             <!-- Select if one or two Datasets should be used here (Comparative on/off)! Effects rendering of the later form part!-->
             <p>Use comparative mode with two data sets?</p>
-            <input type="checkbox" id="DualmodeSwitch" onclick="inputHider(); dualModeChangeState()"/>
+            <input type="checkbox" id="DualmodeSwitch" onclick="inputHider(); dualModeChangeState()" />
             <hr>
 
             <!-- DATA INPUT FORM HERE: -->
@@ -247,11 +255,13 @@
                     <label for="data-tolerance-form-1">
                         Mass Shift Tolerance
                     </label>
-                    <input id="data-tolerance-form-1" name="data-tolerance-form-1" type="number" min="0" max="10" step="0.001" value="0.001"/>
+                    <input id="data-tolerance-form-1" name="data-tolerance-form-1" type="number" min="0" max="10"
+                        step="0.001" value="0.001" />
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
-                    <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select" multiple="multiple">
+                    <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select"
+                        multiple="multiple">
                         <optgroup label="Other">
                             <option value="Chemical derivative">Chemical derivative</option>
                             <option value="Artefact">Artefact</option>
@@ -329,11 +339,13 @@
                     <label for="data-tolerance-form-2">
                         Mass Shift Tolerance
                     </label>
-                    <input id="data-tolerance-form-2" name="data-tolerance-form-2" type="number" min="0" max="10" step="0.001" value="0.001"/>
+                    <input id="data-tolerance-form-2" name="data-tolerance-form-2" type="number" min="0" max="10"
+                        step="0.001" value="0.001" />
 
                     <!-- Exclude Classes -->
                     <!-- TODO: Styling-->
-                    <select id="data-excludecls-form-set-2" class="data-excludecls-form-class" data-role="select" multiple="multiple">
+                    <select id="data-excludecls-form-set-2" class="data-excludecls-form-class" data-role="select"
+                        multiple="multiple">
                         <optgroup label="Other">
                             <option value="Chemical derivative">Chemical derivative</option>
                             <option value="Artefact">Artefact</option>

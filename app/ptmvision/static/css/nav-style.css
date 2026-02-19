@@ -36,7 +36,7 @@ Stylesheet specific for the navigation bar
     text-indent: 5%; /*indent for text, looks nicer*/
 }
 
-#NavBlock p{
+#NavBlock h3{
     text-indent: 5%; /*indent for text, looks nicer*/
 }
 
@@ -57,6 +57,16 @@ Stylesheet specific for the navigation bar
 /*The list for navigating the different htmls of PTMVision in the navigation block*/
 #NavBlock #HTMLNavigation{
     list-style-type: none;
+}
+
+/*"Select Mode heading, default hidden because of default disabled dual mode"*/
+#NavBlock #ViewSelectorHeading{
+    display: none;
+}
+
+/*View selector buttons, default hidden*/
+#NavBlock #ViewSelector{
+    display: none;
 }
 
 /*Button to close the navigation menu*/

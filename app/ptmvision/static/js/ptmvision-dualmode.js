@@ -3,9 +3,11 @@
  */
 const dualModeSwitch = document.getElementById("DualmodeSwitch"); // Switch to toggle Dualmode on and of (in Overview section)
 const dualStatusDisplay = document.getElementById("DualModeStatusDot"); // the dot which should turn green/red if enabled disabled
-const datasetDisplay = document.getElementById("");
-const datasetDisplayContainer = document.getElementById("HeaderSecDataset"); // Container of the dataset display (needed to change display time)
+const datasetDisplayContainer = document.getElementById("HeaderSecDSTextContainer"); // Container of the dataset display (needed to change display time)
+
+// sidebar elements:
 const navDualModeButtons = document.getElementById("ViewSelector"); // Container for the Dataset Buttons
+const navDualModeHeading = document.getElementById("ViewSelectorHeading"); // "Select View" line in the side bar menu
 
 
 console.log(dualModeSwitch);
@@ -61,10 +63,30 @@ function dualModeSendState() {
  */
 function dualModeChangeDisplay() {
 
-    if (_dualMode == false) {
+    if (dualModeGetState() === false) {
+        // Dual mode disabled case
+        
+        // change color of dual mode indicator
         dualStatusDisplay.style.backgroundColor = "red";
-    }else if (_dualMode == true) {
+        
+        // Header "Selected View" field
+        datasetDisplayContainer.style.display = "none";
+
+        // hide dual mode related side bar elements
+        navDualModeButtons.style.display = "none";
+        navDualModeHeading.style.display = "none";
+    }else if (dualModeGetState() === true) {
+        // Dual mode enabled case
+
+        // change color of dual mode indicator
         dualStatusDisplay.style.backgroundColor = "#36FF3B";
+
+        // Header "Selected View" field
+        datasetDisplayContainer.style.display = "inline";
+
+        // show dual mode related side bar elements
+        navDualModeButtons.style.display = "flex";
+        navDualModeHeading.style.display = "block";
     }
 }
 
@@ -93,12 +115,6 @@ function dualModeChangeState() {
     console.log(_dualMode);
 }
 
-/**
- * Function for displaying dual mode relevant elements
- */
-function dualModeShow() {
-
-}
 
 function dualModeHeaderCtl() {
     if (dualModeGetState() == false) {
@@ -126,24 +142,24 @@ function dualModeHeaderCtl() {
     }
 }
 
+
 /**
- * Functions for selecting which dataset (or comparative) should be displayed
- * 
- * @param domIDSet1 dom id of the element to click for displaying data set 1
- * @param domIDSet2 dom id of the element to click for displaying data set 2
- * @param domIDComp dom id of the element to click for displaying comparative view
-*/
-function dualModeSelectView(domIDSet1, domIDSet2, domIDComp){
-    if (domIDSet1) {
-        // TODO: Add Eventlistener
-    }
+ * Show the correct input and hide the wrong input option when selecting input methods!
+ * TODO integrate!!!
+ */
+function inputHider(){
+    const sndDataSet = document.getElementById("input-data-set-2");
+    const yLine = document.getElementById("input-data-y-line");
+    const modeSwitch = document.getElementById("DualmodeSwitch");
 
-    if (domIDSet2) {
-        // TODO: Add Eventlistener
-    }
-
-    if (domIDComp) {
-        // TODO: Add Eventlistener
+    if(!(_dualMode)){
+        // dual mode enabled -> Enable both data input fields invisible
+        sndDataSet.style.display = "none";
+        yLine.style.display = "none";
+    }else{
+        // dual mode disabled -> only 1 data input field
+        sndDataSet.style.display = "block";
+        yLine.style.display = "block";
 
     }
 }

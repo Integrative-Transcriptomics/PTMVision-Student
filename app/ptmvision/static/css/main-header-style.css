@@ -46,6 +46,10 @@ header{
     align-items: center;
 }
 
+#HeaderSecDSTextContainer{
+    display: none;
+}
+
 #HeaderSecDualStatus {
     /*container settings: */
     display: flex;
