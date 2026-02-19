@@ -19,8 +19,6 @@ const yLine = document.getElementById("input-data-y-line");
  */
 var _dualMode = false;
 
-axios.post();
-
 /***
  * Gets the state of _dualMode (boolean)
  * 
