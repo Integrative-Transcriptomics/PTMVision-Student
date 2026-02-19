@@ -13,18 +13,11 @@ const navDualModeHeading = document.getElementById("ViewSelectorHeading"); // "S
 const sndDataSet = document.getElementById("input-data-set-2");
 const yLine = document.getElementById("input-data-y-line");
 
-console.log(dualModeSwitch);
 
 /**
  * Global dual mode variable, default = false (disabled)
  */
 var _dualMode;
-
-
-/**
- * Class for dual mode related functions
- */
-
 
 
 /***
@@ -121,7 +114,6 @@ function dualModeChangeState() {
     }else{
         console.error("reached unreachable state of dualmode...");
     }
-    console.log(_dualMode);
 }
 
 
