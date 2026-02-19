@@ -17,7 +17,7 @@ const yLine = document.getElementById("input-data-y-line");
 /**
  * Global dual mode variable, default = false (disabled)
  */
-var _dualMode;
+var _dualMode = false;
 
 
 /***
@@ -51,6 +51,19 @@ function dualModeSendState() {
     //_dualMode
     // axios com
     //TODO
+    /*
+    try{
+        const {data} = await axios({
+            method: "put",
+            url: "/dualModeStatus",
+            data: {
+                dualmode: dualModeGetState() // returns true or false...
+            }
+        })
+    }catch (err){
+        console.log("Error while sending dual mode status to server! Error code: " + err.response.status);
+    }
+    */
 }
 
 /**
@@ -106,9 +119,10 @@ function dualModeChangeState() {
         // dual mode was disabled and get enabled now
         dualModeSetOff();
     }else{
+        // this should not be enterable
         console.error("reached unreachable state of dualmode...");
     }
-    
+
     dualModeChangeDisplay();
     dualModeSendState();
 }
@@ -132,7 +146,7 @@ function dualInputDisplay(action){
         yLine.style.display = "block";
     }else{
         // error case
-        console.log("Problem at displaying 2nd Dataset input correctly");
+        console.error("Problem at displaying 2nd Dataset input correctly");
         // TODO change to error...
     }
 }

@@ -1,12 +1,4 @@
 /**
- * var for the view mode
- * - "C" = comparative (default)
- * - "1" = show only dataset 1
- * - "2" = show only dataset 2:
-*/
-var _selectedView = "C";
-
-/**
  * Function for manipulating the _selectedView variable with button input
  * @param String (input from the view select buttons) one of:
  * - "C"
@@ -20,19 +12,16 @@ function selectView(input){
     switch(input){
         case "C":
             // comparative case
-            console.log(input + " = C");
             $("#Selection").empty();
             $("#Selection").append("<p>Comparative</p>");
             break;
         case "1":
             // only dataset 1
-            console.log(input + " = 1");
             $("#Selection").empty();
             $("#Selection").append("<p>Dataset 1</p>");
             break;
         case "2":
             // only dataset 2
-            console.log(input + " = 2");
             $("#Selection").empty();
             $("#Selection").append("<p>Dataset 2</p>");
             break;
