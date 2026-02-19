@@ -9,6 +9,9 @@ const datasetDisplayContainer = document.getElementById("HeaderSecDSTextContaine
 const navDualModeButtons = document.getElementById("ViewSelector"); // Container for the Dataset Buttons
 const navDualModeHeading = document.getElementById("ViewSelectorHeading"); // "Select View" line in the side bar menu
 
+// 2 dataset input, 2nd dataset elements
+const sndDataSet = document.getElementById("input-data-set-2");
+const yLine = document.getElementById("input-data-y-line");
 
 console.log(dualModeSwitch);
 
@@ -75,6 +78,9 @@ function dualModeChangeDisplay() {
         // hide dual mode related side bar elements
         navDualModeButtons.style.display = "none";
         navDualModeHeading.style.display = "none";
+
+        // hide 2nd dataset input
+        dualInputDisplay("hide");
     }else if (dualModeGetState() === true) {
         // Dual mode enabled case
 
@@ -87,6 +93,9 @@ function dualModeChangeDisplay() {
         // show dual mode related side bar elements
         navDualModeButtons.style.display = "flex";
         navDualModeHeading.style.display = "block";
+
+        // show 2nd dataset input
+        dualInputDisplay("show");
     }
 }
 
@@ -145,21 +154,23 @@ function dualModeHeaderCtl() {
 
 /**
  * Show the correct input and hide the wrong input option when selecting input methods!
- * TODO integrate!!!
+ * @param String action, one of:
+ * - "hide"
+ * - "show"
+ * - else error
  */
-function inputHider(){
-    const sndDataSet = document.getElementById("input-data-set-2");
-    const yLine = document.getElementById("input-data-y-line");
-    const modeSwitch = document.getElementById("DualmodeSwitch");
-
-    if(!(_dualMode)){
-        // dual mode enabled -> Enable both data input fields invisible
+function dualInputDisplay(action){
+    if(action === "hide"){
+        // dual mode disabled
         sndDataSet.style.display = "none";
         yLine.style.display = "none";
-    }else{
-        // dual mode disabled -> only 1 data input field
+    }else if(action === "show"){
+        // dual mode enabled
         sndDataSet.style.display = "block";
         yLine.style.display = "block";
-
+    }else{
+        // error case
+        console.log("Problem at displaying 2nd Dataset input correctly");
+        // TODO change to error...
     }
 }

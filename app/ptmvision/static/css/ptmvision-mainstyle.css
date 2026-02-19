@@ -23,10 +23,6 @@ section{
     background-color: #bdbdbd;
 }
 
-#input-data-set-2{
-    display: none;
-}
-
 
 #OverviewSection{
     background-color: #bdbdbd;
@@ -52,6 +48,18 @@ section{
     display: flex;
 }
 
+#input-data-set-1{
+    width: 45%;
+}
+
+#input-data-set-2{
+    display: none;
+    width: 45%;
+}
+
+#input-data-y-line{
+    display: none;
+}
 
 /*
 Important for correct select 2 multi select display:
