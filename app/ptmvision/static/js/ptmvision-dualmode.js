@@ -54,7 +54,7 @@ function dualModeSendState() {
         case true:
             console.log("True status");
             axios.put(
-                "/dualmodestatus",
+                window.location.origin + "/dualmodestatus",
                 {
                     title: "DualModeStatus",
                     description: "DualMode = True",
