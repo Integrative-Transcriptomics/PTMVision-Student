@@ -56,14 +56,22 @@ function dualModeSendState() {
             axios.put(
                 window.location.origin + "/dualmodestatus",
                 {
-                    title: "DualModeStatus",
-                    description: "DualMode = True",
-                    content
+                    dualMode: "true"
                 }
             )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err)); // TODO: MSG Display
             break;
         case false:
             console.log("False status");
+            axios.put(
+                window.location.origin + "/dualmodestatus",
+                {
+                    dualMode: "false"
+                }
+            )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
             break;
     }
 
