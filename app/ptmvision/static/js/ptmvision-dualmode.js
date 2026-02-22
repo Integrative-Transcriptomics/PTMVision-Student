@@ -74,10 +74,6 @@ function dualModeSendState() {
             .catch((err) => console.log(err));
             break;
     }
-
-
-
-    console.log("Error while sending dual mode status to server! Error code: ");
 }
 
 /**
