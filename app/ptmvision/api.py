@@ -44,12 +44,24 @@ DEBUG = os.getenv("DEBUG")
 """ Start session """
 Session(app)
 
+@app.route("/dualmodestatus", methods=["GET","POST"])
+def get_dual_mode():
+    """
+    Function for loading the dualMode variable which 
+    was send by the client.
+    """
+    try:
+        return "Ok", 200
+    except Exception as e:
+        return "Failes POST request for dual mode status " + format_exception(e), 500
+
+
 @app.route("/example_session", methods=["GET"])
 def example_session():
     """
     Route to load an example session from a JSON file.
     """
-    try :
+    try:
         [session.pop(key) for key in list(session.keys())]
         with open( BASEPATH + "/static/resources/example_session/" + request.args.get("fileIdentifier") + ".zlib", "rb" ) as example_session_data :
             session_data = zlib.decompress( base64.b64decode( example_session_data.read( ) ) ).decode( )

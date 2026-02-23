@@ -53,7 +53,7 @@ function dualModeSendState() {
     switch(dualModeGetState()){
         case true:
             console.log("True status");
-            axios.put(
+            axios.post(
                 window.location.origin + "/dualmodestatus",
                 {
                     dualMode: "true"
@@ -64,7 +64,7 @@ function dualModeSendState() {
             break;
         case false:
             console.log("False status");
-            axios.put(
+            axios.post(
                 window.location.origin + "/dualmodestatus",
                 {
                     dualMode: "false"
