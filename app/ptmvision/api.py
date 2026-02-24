@@ -25,6 +25,7 @@ MODIFICATIONS_DATA = "7421BE93662C5"
 SESSION_STATE = "E3D6FB747F7ED"
 STATE_HAS_DATA = "has_data"
 STATE_PROTEIN_SELECTED = "protein_selected"
+DUAL_MODE = "disabled" # Dual mode variable (default disabled, enabled)
 #BASEPATH = "./app/ptmvision" # Uncomment for local development.
 BASEPATH = "/app/ptmvision" # Uncomment for deployment.
 
@@ -47,10 +48,12 @@ Session(app)
 @app.route("/dualmodestatus", methods=["GET","POST"])
 def get_dual_mode():
     """
-    Function for loading the dualMode variable which 
-    was send by the client.
+    Function for loading the status of the dualMode variable
+    from the client side.
     """
     try:
+        [session.pop(key) for key in list(session.keys())]
+
         return "Ok", 200
     except Exception as e:
         return "Failes POST request for dual mode status " + format_exception(e), 500
