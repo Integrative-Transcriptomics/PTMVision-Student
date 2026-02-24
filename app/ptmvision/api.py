@@ -53,8 +53,11 @@ def get_dual_mode():
     """
     try:
         [session.pop(key) for key in list(session.keys())]
+        
+        current_dual_state = request.get_json()
 
-        return "Ok", 200
+        state_dual_mode = current_dual_state["dualMode"]
+        return "Ok" , 200
     except Exception as e:
         return "Failes POST request for dual mode status " + format_exception(e), 500
 
