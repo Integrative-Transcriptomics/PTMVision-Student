@@ -25,7 +25,7 @@ MODIFICATIONS_DATA = "7421BE93662C5"
 SESSION_STATE = "E3D6FB747F7ED"
 STATE_HAS_DATA = "has_data"
 STATE_PROTEIN_SELECTED = "protein_selected"
-DUAL_MODE = "disabled" # Dual mode variable (default disabled, enabled)
+DUAL_MODE = False # Dual mode variable (default disabled, enabled)
 #BASEPATH = "./app/ptmvision" # Uncomment for local development.
 BASEPATH = "/app/ptmvision" # Uncomment for deployment.
 
@@ -51,15 +51,36 @@ def get_dual_mode():
     Function for loading the status of the dualMode variable
     from the client side.
     """
+
+    global DUAL_MODE
+
     try:
         [session.pop(key) for key in list(session.keys())]
         
         current_dual_state = request.get_json()
 
         state_dual_mode = current_dual_state["dualMode"]
-        return "Ok" , 200
+
+        print("currentdual state: " + state_dual_mode)
+
+        if state_dual_mode == "true":
+            DUAL_MODE = True
+            print("now" + DUAL_MODE)
+        else:
+            DUAL_MODE = False
+            print("now" + DUAL_MODE)
+
+        
+        test = testfunc()
+
+        return "Ok " + state_dual_mode + str(test), 200
     except Exception as e:
-        return "Failes POST request for dual mode status " + format_exception(e), 500
+        return "Failes POST request for dual mode status " + _format_exception(e), 500
+
+
+def testfunc():
+    print(DUAL_MODE)
+    return 0
 
 
 @app.route("/example_session", methods=["GET"])
@@ -518,7 +539,7 @@ def _format_exception(e: str) -> str:
     """
     if DEBUG:
         # Print the exception traceback with color highlighting
-        print("\u001b[31m" + "".join(traceback.format_exception(e)) + "\u001b[0m")
+        print("\u001b[31m" + "" + str(e) + "\u001b[0m")
 
     # Format only the exception message
-    return "".join(traceback.format_exception_only(e)).strip()
+    return "".join(str(e))
