@@ -65,22 +65,15 @@ def get_dual_mode():
 
         if state_dual_mode == "true":
             DUAL_MODE = True
-            print("now" + DUAL_MODE)
+            print("now" + str(DUAL_MODE))
         else:
             DUAL_MODE = False
-            print("now" + DUAL_MODE)
+            print("now" + str(DUAL_MODE))
 
-        
-        test = testfunc()
-
-        return "Ok " + state_dual_mode + str(test), 200
+        return "Ok " + str(DUAL_MODE), 200
     except Exception as e:
         return "Failes POST request for dual mode status " + _format_exception(e), 500
 
-
-def testfunc():
-    print(DUAL_MODE)
-    return 0
 
 
 @app.route("/example_session", methods=["GET"])
