@@ -61,16 +61,12 @@ def get_dual_mode():
 
         state_dual_mode = current_dual_state["dualMode"]
 
-        print("currentdual state: " + state_dual_mode)
-
         if state_dual_mode == "true":
             DUAL_MODE = True
-            print("now" + str(DUAL_MODE))
         else:
             DUAL_MODE = False
-            print("now" + str(DUAL_MODE))
 
-        return "Ok " + str(DUAL_MODE), 200
+        return "Ok ", 200
     except Exception as e:
         return "Failes POST request for dual mode status " + _format_exception(e), 500
 
