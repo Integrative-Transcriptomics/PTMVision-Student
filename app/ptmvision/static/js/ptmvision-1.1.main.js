@@ -23,6 +23,15 @@ var _dashboardContent = null;
 
 
 /**
+ * Global colors for dual mode
+ */
+const colorSet1 = "#435c9c";
+const colorSet2 = "#E9625A";
+
+
+
+
+/**
  * ECharts option for global axis style.
  */
 const STYLE_AXIS = {
