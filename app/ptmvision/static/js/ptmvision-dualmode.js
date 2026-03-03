@@ -52,26 +52,26 @@ function dualModeSendState() {
 
     switch(dualModeGetState()){
         case true:
-            console.log("True status");
+            //console.log("True status");
             axios.post(
                 window.location.origin + "/dualmodestatus",
                 {
                     dualMode: "true"
                 }
             )
-            .then((res) => console.log(res))
+            .then((res) => displayNotification("Dual mode updated successfully")) // TODO: MSG Display (displayNote(res))
             .catch((err) => console.log(err)); // TODO: MSG Display
             break;
         case false:
-            console.log("False status");
+            //console.log("False status");
             axios.post(
                 window.location.origin + "/dualmodestatus",
                 {
                     dualMode: "false"
                 }
             )
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+            .then((res) => displayNotification("Dual mode updated successfully")) // TODO: MSG Display (displayNote(res))
+            .catch((err) => console.log(err)); // TODO: MSG Display
             break;
     }
 }

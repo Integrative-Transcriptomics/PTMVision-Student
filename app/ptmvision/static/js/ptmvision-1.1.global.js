@@ -17,20 +17,27 @@ function redirectTo(pageName, target) {
 }
 
 /**
+ * Function used to pause code excecution for a given amount of time
+ * @param _time (in ms)
+ * @returns 
+ */
+function waitTime(_time){
+  return new Promise((resolve) => setTimeout(resolve, _time));
+}
+
+/**
  * Displays a notification to the user.
  *
  * @param {String} text The text to display in the notification.
  */
-function displayNotification(text) {
-  //TODO: fix selector + rebuild
+async function displayNotification(text) {
+  //TODO: rebuild
 
-  
-  $("#HeaderSecError").append(
-    `<div class='notification'><i class="fa-duotone fa-spinner-third fa-spin fa-2xl"></i> ` +
-      text +
-      `</div>`
-  );
-  
+  $("#HeaderSecError").empty();
+  $("#HeaderSecError").append("<p>" + text + "</p>");
+  await waitTime(3000);
+  $("#HeaderSecError").empty();
+
 }
 
 /**
@@ -48,8 +55,8 @@ function removeNotification() {
 function displayAlert(text) {
   $("#menu").append(
     `<div class='alert'><i class="fa-duotone fa-circle-exclamation"></i> ` +
-      text +
-      `<button class='button-no-decoration float-right' onclick='$(".alert").remove()'><i class="fa-solid fa-x"></i></button></div>`
+    text +
+    `<button class='button-no-decoration float-right' onclick='$(".alert").remove()'><i class="fa-solid fa-x"></i></button></div>`
   );
 }
 
@@ -77,8 +84,8 @@ function downloadSessionData() {
       downloadBlob(
         response.data,
         "ptmvision-" +
-          [D.getFullYear(), D.getMonth() + 1, Date.now()].join("-") +
-          ".zlib"
+        [D.getFullYear(), D.getMonth() + 1, Date.now()].join("-") +
+        ".zlib"
       );
     })
     .catch((error) => {
