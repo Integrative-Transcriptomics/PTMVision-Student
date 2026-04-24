@@ -287,3 +287,13 @@ async function startSession() {
 }
 
 
+
+// Teil um charts zu clearen - Reusen!
+/**
+ * Clears the overview and dashboard charts.
+ */
+function clearCharts() {
+  _overviewChart.clear();
+  _proteinviewChart.clear();
+  //_dashboardChart.clear();
+}
