@@ -1,0 +1,19 @@
+/*
+Styling of molecule view window (kekulejs)
+(window opens when pressing on supported ptms in PTMCounts)
+*/
+body {
+    background-color: rgb(126, 149, 153);
+}
+
+.Centered {
+    
+    color: #1d1d1d;
+}
+
+#molDisplay{
+    border: 2px solid black;
+    height: 300px;
+    width: 400px;
+    background-color: #FFFFFF;
+}

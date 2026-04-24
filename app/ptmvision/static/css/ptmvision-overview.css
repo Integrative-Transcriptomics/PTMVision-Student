@@ -1,0 +1,12 @@
+#Overview{
+    /*Main Overview Chart*/
+    height: 600px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+#PTMCountMolView{
+    /*PTM Count with click interaction*/
+
+}

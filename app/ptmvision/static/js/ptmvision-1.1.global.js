@@ -31,8 +31,6 @@ function waitTime(_time){
  * @param {String} text The text to display in the notification.
  */
 async function displayNotification(text) {
-  //TODO: rebuild
-
   $("#HeaderSecError").empty();
   $("#HeaderSecError").append("<p>" + text + "</p>");
   await waitTime(3000);
@@ -49,6 +47,8 @@ function removeNotification() {
 
 /**
  * Displays a toast element with a custom error message to the user.
+ * 
+ * TODO: Remove - old
  *
  * @param {String} text The message to display.
  */

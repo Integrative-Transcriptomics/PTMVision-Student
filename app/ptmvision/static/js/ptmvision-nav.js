@@ -1,3 +1,12 @@
+/**
+ * ------------------------------------------------
+ * +++++++++++++++Navigation+++++++++++++++++++++++
+ * ------------------------------------------------
+ * 
+ * This script contains functions related to the
+ * navigation menu (left side)
+ */
+
 
 /*
 function to open the navigation bar (sidebar)

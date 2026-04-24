@@ -4,6 +4,7 @@ header{
     display: flex;
     flex-wrap: nowrap;
     position: sticky;
+    z-index: 1000;
     top: 0;
 }
 

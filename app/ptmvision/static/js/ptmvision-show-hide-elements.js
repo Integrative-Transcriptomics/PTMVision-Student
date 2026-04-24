@@ -2,6 +2,8 @@
 Javascript code for handling html behavior (showing/hiding)
 */
 
+// TODO: This code is only temporary solution
+
 
 //show PTM Overview Section and Protein Selection Section
 function showOverviewAndProtSelect(){
@@ -14,13 +16,6 @@ function showOverviewAndProtSelect(){
 }
 
 //show Protein Details Section
-function showProteinDetails(){
-    document.getElementById("ProteinDetailsSection").style.display = "block";
+function showDashboard(){
+    document.getElementById("DashboardSection").style.display = "block";
 }
-
-
-//show Modification Details Section
-function showModificationDetails(){
-    document.getElementById("ModificationDetailsSection").style.display = "block";
-}
-

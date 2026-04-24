@@ -1,4 +1,15 @@
 /**
+ * ------------------------------------------------
+ * +++++++++++++++DualMode+++++++++++++++++++++++++
+ * ------------------------------------------------
+ * 
+ * This scripts contains functions necessary for the
+ * dual mode to work (state, DOM manipulation, Server communication)
+ * 
+ * DUAL MODE REQUESTS CREATE ERROR ON SECOND FUNCTION CALL
+ */
+
+/**
  * Needed dom elements for displaying dual mode in header
  */
 const dualModeSwitch = document.getElementById("DualmodeSwitch"); // Switch to toggle Dualmode on and of (in Overview section)
@@ -112,6 +123,9 @@ function dualModeChangeDisplay() {
 
         // show 2nd dataset input
         dualInputDisplay("show");
+
+        // charts:
+        // clearCharts();
     }
 }
 

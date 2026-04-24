@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Molecule Display</title>
+    <script src="../static/js/lib-kekule.min.js"></script>
+
+    <link href="../static/css/molview-style.css" rel="stylesheet">
+    <link href=" https://cdn.jsdelivr.net/npm/kekule@1.0.3/dist/themes/default/kekule.min.css " rel="stylesheet">
+</head>
+
+<body>
+    <div id="molDisplay"></div>
+    <br>
+
+    <h1 id="title">Molecule: </h1>
+
+    <script>
+        // get html elements
+        let elemDisp = document.getElementById("molDisplay");
+        let elemTitle = document.getElementById("title");
+
+        // get user input data by url params:
+        let input = new URLSearchParams(window.location.search);
+        let molName = input.get("molname");
+        let molCML = input.get("cml");
+
+        // IT SHOULD BE NOTED THAT THE CMLs CANT BE LARGER THAN A BROWSER SPECIFIC SIZE!!!
+
+        // debug
+        //console.log("Name: ", molName);
+        //console.log("CML: ", molCML);
+
+        // init molecule display
+        let domElem = document.getElementById("molDisplay");
+        let setWidth = domElem.clientWidth;
+        let setHeight = domElem.clientHeight;
+
+        // set kekule js options
+        let molecule = Kekule.IO.loadFormatData(molCML, "cml");
+        let chemViewer = new Kekule.ChemWidget.Viewer(document);
+        chemViewer.setDimension("100%", "100%");
+        chemViewer.appendToElem(domElem);
+        chemViewer
+            .setEnableToolbar(true)
+            .setEnableDirectInteraction(true)
+            .setEnableEdit(false)
+            .setToolButtons(['saveData', 'zoomIn', 'zoomOut'])
+            .setChemObj(molecule);
+
+        // append Molecule name to element
+        elemTitle.append(molName);
+
+    </script>
+</body>
+
+</html>

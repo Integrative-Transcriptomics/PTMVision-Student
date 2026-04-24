@@ -8,98 +8,55 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="../static/css/ptmvision-mainstyle.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/ptmvision-header.css">
     <link rel="stylesheet" type="text/css" href="../static/css/nav-style.css">
     <link rel="stylesheet" type="text/css" href="../static/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/dual-mode-button-style.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/main-header-style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/tabulator-6.1.0.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/ptmvision-overview.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/ptmvision-protein.css">
 
     <!-- Javascript -->
     <!-- JS-Libraries -->
 
-    <!-- JQuery as requirement + easier js code -->
-    <script src="../static/js/jquery-3.7.1.min.js"></script>
+    <!-- JQuery as requirement + js code -->
+    <script src="../static/js/lib-jquery-3.7.1.min.js"></script>
     <!-- Select2 for multi select -->
-    <script src="../static/js/select2.min.js"></script>
-    <!-- Fontawesome for the looks -->
-    <script src="https://kit.fontawesome.com/df04f22e3d.js"></script>
+    <script src="../static/js/lib-select2.min.js"></script>
     <!-- Apache ECharts for chart display -->
-    <script src="../static/js/echarts-6.0.0.min.js"></script>
+    <script src="../static/js/lib-echarts-6.0.0.min.js"></script>
     <!-- Axios for requests -->
-    <script src="../static/js/axios-1.13.5.min.js"></script>
+    <script src="../static/js/lib-axios-1.13.5.min.js"></script>
     <!-- Pako for zlib handling -->
-    <script src="../static/js/pako-2.1.0.min.js"></script>
+    <script src="../static/js/lib-pako-2.1.0.min.js"></script>
+    <!-- Tabulator for Tables-->
+    <script src="../static/js/lib-tabulator-6.1.0.min.js"></script>
+    <!-- 3Dmol for 3D molecule display-->
+    <script src="../static/js/lib-3Dmol-2.1.0.min.js"></script>
 
-
-
-    <!-- Flask style
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/jquery-3.7.1.min.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/jquery-3.7.1.min.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="https://kit.fontawesome.com/df04f22e3d.js"
-			crossorigin="anonymous"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/echarts-6.0.0.min.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/axios-1.1.2.min.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/pako-2.1.0.min.js')}}"
-	></script>
-    -->
 
 
     <!-- Scripts -->
-    <script src="../static/js/ptmvision-1.1.main.js" defer></script>
     <script src="../static/js/ptmvision-1.1.global.js" defer></script>
-    <script src="../static/js/navbar.js" defer></script>
+    <script src="../static/js/ptmvision-other.js" defer></script>
+    <script src="../static/js/ptmvision-colors.js" defer></script>
+    <script src="../static/js/ptmvision-chart.js" defer></script>               <!--Contains Chart class-->
+    <script src="../static/js/ptmvision-chartfunctions.js"></script>
+    <script src="../static/js/ptmvision-session.js" defer></script>             <!-- Contains session control related functions-->
+    <script src="../static/js/ptmvision-overview.js" defer></script>            <!-- Contains content for the overview section-->
+    <script src="../static/js/ptmvision-proteinview.js" defer></script>         <!-- Contains content for the proteinview section-->
+    <script src="../static/js/ptmvision-dashboard.js" defer></script>           <!-- Contains content for the dashboard section-->
+    <script src="../static/js/ptmvision-nav.js" defer></script>
     <script src="../static/js/select2-display.js"></script>
     <script src="../static/js/ptmvision-dualmode.js" defer></script>
     <script src="../static/js/ptmvision-selectview.js" defer></script>
-    <script src="../static/js/ptmvision-show-hide-elements.js" defer></script> <!-- defer required, else null error-->
-
-    <!-- Flask readable style:
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/ptmvision-1.1.main.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/ptmvision-1.1.global.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='js/navbar.js')}}"
-	></script>
-
-    <script
-			type="text/javascript"
-			src="{{url_for('static', filename='ptmvision-show-hide-elements.js')}}"
-            defer
-	></script> defer required, else null error-->
-
+    <script src="../static/js/ptmvision-show-hide-elements.js" defer></script> 
+    <script src="../static/js/molview-lib.js" defer></script>
+    <!-- defer required, else null error-->
 
 </head>
 
-<body>
+<body onload="init()">
 
     <!-- Header for notifications and dual mode status -->
     <header>
@@ -109,7 +66,6 @@
         </section>
         <section id="HeaderSecError" class="headerSec">
             <!-- Should be used to display error messanges -->
-            <!-- TODO! -->
             <p></p>
         </section>
         <section id="HeaderSecSpace" class="headerSec">
@@ -201,11 +157,6 @@
                 protein sequence and in a spatial structural context.
             </p>
             <hr>
-            <button data-role="hint" data-hint-position="right"
-                data-hint-text="Start an example session with data from the Bio+MedVis Challenge @IEEE VIS 2022"
-                onclick="startExampleSession('ptmvision.example.biomedvis2022.plain')">
-                Try Example
-            </button>
             <!--Empty line at the end of section (looks better)-->
             <p>&nbsp</p>
         </section>
@@ -224,11 +175,15 @@
             <hr>
 
             <!-- DATA INPUT FORM HERE: -->
-            <!-- TODO: Edit-->
             <div id="input-data-container">
 
                 <!-- INPUT of Dataset 1 -->
                 <form id="input-data-set-1">
+                    <label for="data-name-1">Data name:</label>
+                    <input type="text" id="data-name-1">
+                    <button type="button" onclick="changeDataName(1)">Change Name</button>
+                    <br>
+                    <br>
                     <!-- Menu for Data input type selection: Dataset 1 -->
                     <select id="data-type-form-1" data-role="select">
                         <optgroup label="Search Engine">
@@ -259,7 +214,6 @@
                         step="0.001" value="0.001" />
 
                     <!-- Exclude Classes -->
-                    <!-- TODO: Styling-->
                     <select id="data-excludecls-form-set-1" class="data-excludecls-form-class" data-role="select"
                         multiple="multiple">
                         <optgroup label="Other">
@@ -313,6 +267,12 @@
 
                 <!-- INPUT of Dataset 2 -->
                 <form id="input-data-set-2">
+                    <!-- Input Name Default "Data2"-->
+                    <label for="data-name-2">Data name:</label>
+                    <input type="text" id="data-name-2">
+                    <button type="button" onclick="changeDataName(2)">Change Name</button>
+                    <br>
+                    <br>
                     <!-- Menu for Data input type selection: Dataset 2 -->
                     <select id="data-type-form-2" data-role="select">
                         <optgroup label="Search Engine">
@@ -343,7 +303,6 @@
                         step="0.001" value="0.001" />
 
                     <!-- Exclude Classes -->
-                    <!-- TODO: Styling-->
                     <select id="data-excludecls-form-set-2" class="data-excludecls-form-class" data-role="select"
                         multiple="multiple">
                         <optgroup label="Other">
@@ -401,121 +360,56 @@
 
             <!-- Button for sending data for processing to the server -->
             <button id="SubmitInputButton" onclick="startSession(); showOverviewAndProtSelect()">Submit</button>
-            <!-- TODO: edit startSession() [ptmvision-main.js]-->
         </section>
 
         <section id="OverviewSection">
             <h1>Overview</h1>
-
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
-                facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-                nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                dolore eu feugiat nulla facilisis.
-
-                At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-                eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam
-                diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet
-                clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum
-                dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                invidunt ut labore et dolore magna aliquyam erat.
-
-                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus.
-
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
-                ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
-                qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-            </p>
-
+            <div id="Overview"></div>
+            <div id="PTMCountMolView"></div>
         </section>
 
         <section id="ProteinSelectionSection">
-            <h1>Protein Selection</h1>
+            <h1>Proteins</h1>
 
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
+            <div id="ProtTableTitle"></div>
+            <div id="ProtTable">
+                <!-- Legacy Table representation-->
+            </div>
+
+            <br>
+            <div id="SortProtTree">
+                <!-- Selection and button for sorting the treemap-->
+                <select name="InputSortProtTree" id="InputSortProtTree">
+                    <option value="Modified_positions">Modified positions</option>
+                    <option value="Unique_modifications">Unique modifications</option>
+                    <option value="Protein_length">Protein length</option>
+                </select>
+                <button id="TriggerSortProtTree" onclick="proteinChartSortOptChange()">Change</button>
+            </div>
+
+            <br>
+
+            <div id="ProteinTreemap" onclick="userSelection()">
+                <!-- Protein Treemap here!-->
+            </div>
+            <br>
+
+            <div id="ProteinSelectionText" onclick="userSelection()">
+                <!-- Shows which protein has been selected-->
+            </div>
 
 
-            <button id="ConfirmProteinSelectionButton" onclick="showProteinDetails()">Confirm Selection</button>
+            <button id="ConfirmProteinSelectionButton" onclick="showDashboard()">Confirm Selection</button>
         </section>
 
-        <section id="ProteinDetailsSection">
-            <h1>Protein Details</h1>
+        <section id="DashboardSection">
+            <h1>Dashboard</h1>
 
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
+            <div id="DashboardChart1"></div>
+            <div id="DashboardChart2"></div>
 
-            <button id="ShowModDetailsButton" onclick="showModificationDetails()">Show Modification</button>
         </section>
 
-        <section id="ModificationDetailsSection">
-            <h1>Modification Details</h1>
-
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-        </section>
     </main>
 
 </body>

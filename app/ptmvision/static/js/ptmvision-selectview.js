@@ -1,4 +1,13 @@
 /**
+ * ------------------------------------------------
+ * ++++++++++++View Selection++++++++++++++++++++++
+ * ------------------------------------------------
+ * 
+ * Functions for selecting the view when dual mode is 
+ * enabled (show only 1 set -> which one? or both)
+ */
+
+/**
  * Function for manipulating the _selectedView variable with button input
  * @param String (input from the view select buttons) one of:
  * - "C"

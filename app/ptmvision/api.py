@@ -21,7 +21,8 @@ import json, zlib, os, base64, traceback
 load_dotenv()
 
 """ Definition of session keys """
-MODIFICATIONS_DATA = "7421BE93662C5"
+MODIFICATIONS_DATA1 = "7421BE93662C5"
+MODIFICATIONS_DATA2 = "7421BE93662D6"
 SESSION_STATE = "E3D6FB747F7ED"
 STATE_HAS_DATA = "has_data"
 STATE_PROTEIN_SELECTED = "protein_selected"
@@ -71,22 +72,22 @@ def get_dual_mode():
         return "Failes POST request for dual mode status " + _format_exception(e), 500
 
 
-
+"""
 @app.route("/example_session", methods=["GET"])
 def example_session():
-    """
-    Route to load an example session from a JSON file.
-    """
+    
+    #Route to load an example session from a JSON file.
+    
     try:
         [session.pop(key) for key in list(session.keys())]
         with open( BASEPATH + "/static/resources/example_session/" + request.args.get("fileIdentifier") + ".zlib", "rb" ) as example_session_data :
             session_data = zlib.decompress( base64.b64decode( example_session_data.read( ) ) ).decode( )
-        session[MODIFICATIONS_DATA] = json.loads(session_data)
+        session[MODIFICATIONS_DATA1] = json.loads(session_data)
         _set_session_state(**{STATE_HAS_DATA: True})
         return "Ok", 200
     except Exception as e :
         return "[Status 500] Failed request to start an example session: " + _format_exception(e), 500
-
+"""
 
 @app.route("/resource", methods=["GET"])
 def get_resource():
@@ -98,35 +99,38 @@ def get_resource():
     except Exception as e:
         return "[Status 500] Failed request to retrieve resource: " + _format_exception(e), 500
 
-
+"""
 @app.route("/download_session", methods=["GET"])
 def download_session():
-    """
+    
     Route to download the current session as a zlib file.
-    """
-    if MODIFICATIONS_DATA not in session:
+    
+    if MODIFICATIONS_DATA1 not in session:
         return "[Status 404] Failed request to download session data: The resource is not available. Was a PTMVision session started?", 404
     try :
         zlib_compress = zlib.compressobj( 6, zlib.DEFLATED, zlib.MAX_WBITS )
-        compressed_session_bytes = zlib_compress.compress( bytes(json.dumps(session[MODIFICATIONS_DATA]), "utf-8") ) + zlib_compress.flush( )
+        compressed_session_bytes = zlib_compress.compress( bytes(json.dumps(session[MODIFICATIONS_DATA1]), "utf-8") ) + zlib_compress.flush( )
         encoded_session = base64.b64encode( compressed_session_bytes ).decode("ascii")
         return encoded_session, 200
     except Exception as e :
         return "[Status 500] Failed request to download session data: " + _format_exception(e), 500
+"""
 
-
+"""
 @app.route("/restart_session", methods=["POST"])
 def restart_session():
-    """
+    
     Route to restart a previous session.
-    """
+    
     try :
         [session.pop(key) for key in list(session.keys())]
         session_data = zlib.decompress( base64.b64decode( request.data ) ).decode( )
-        session[MODIFICATIONS_DATA] = json.loads(session_data)
+        session[MODIFICATIONS_DATA1] = json.loads(session_data)
         return "Ok", 200
     except Exception as e :
         return "[Status 500] Failed request to restart session: " + _format_exception(e), 500
+"""
+
 
 @app.route("/process_search_engine_output", methods=["POST"])
 def process_search_engine_output():
@@ -136,23 +140,58 @@ def process_search_engine_output():
     try:
         [session.pop(key) for key in list(session.keys())]
         json_request_data = _request_to_json(request.data)
+        if DUAL_MODE:
+            """
+            case: Dual mode enabled - 2 datasets as input
+            """
 
-        json_user_data = utils.parse_user_input(
-            StringIO(json_request_data["content"]),
-            json_request_data["contentType"],
-            json_request_data["massShiftTolerance"],
-            json_request_data["excludeClasses"],
-            json_request_data["filename"]
-        )
-        session[MODIFICATIONS_DATA] = json_user_data
-        _set_session_state(**{STATE_HAS_DATA: True})
-        # Uncomment for local development.
-        """
-        if DEBUG :
-            with open( "./dump.json", "w+" ) as dumpfile :
-                dumpfile.write( json.dumps( session[MODIFICATIONS_DATA], indent = 3 ) )
-        """
-        return "Ok", 200
+            # data 1
+            json_user_data1 = utils.parse_user_input(
+                StringIO(json_request_data["content1"]),
+                json_request_data["contentType1"],
+                json_request_data["massShiftTolerance1"],
+                json_request_data["excludeClasses1"],
+                json_request_data["filename1"]
+                )
+            session[MODIFICATIONS_DATA1] = json_user_data1
+
+            # data 2
+            json_user_data2 = utils.parse_user_input(
+                StringIO(json_request_data["content2"]),
+                json_request_data["contentType2"],
+                json_request_data["massShiftTolerance2"],
+                json_request_data["excludeClasses2"],
+                json_request_data["filename2"]
+            )
+            session[MODIFICATIONS_DATA2] = json_user_data2
+
+            # update session state
+            _set_session_state(**{STATE_HAS_DATA: True}) 
+
+            return "Ok", 200
+        else:
+            """
+            case: Dual mode disabled - only 1 dataset as input
+            """
+            json_user_data1 = utils.parse_user_input(
+                StringIO(json_request_data["content1"]),
+                json_request_data["contentType1"],
+                json_request_data["massShiftTolerance1"],
+                json_request_data["excludeClasses1"],
+                json_request_data["filename1"]
+            )
+            session[MODIFICATIONS_DATA1] = json_user_data1
+
+            # update session state
+            _set_session_state(**{STATE_HAS_DATA: True}) 
+            # Uncomment for local development.
+            """
+            if DEBUG :
+                with open( "./dump.json", "w+" ) as dumpfile :
+                    dumpfile.write( json.dumps( session[MODIFICATIONS_DATA1], indent = 3 ) )
+            """
+            return "Ok", 200
+
     except Exception as e:
         return "[Status 500] Failed request to process search engine output: " + _format_exception(e), 500
 
@@ -164,11 +203,11 @@ def available_proteins():
     """
     try :
         protein_entries = []
-        if MODIFICATIONS_DATA in session:
+        if MODIFICATIONS_DATA1 in session:
             protein_identifiers_unannotated = list(
                 filter(
-                    lambda _ : "annotation" not in session[MODIFICATIONS_DATA]["proteins"][ _ ],
-                    list( session[MODIFICATIONS_DATA]["proteins"].keys( ) )
+                    lambda _ : "annotation" not in session[MODIFICATIONS_DATA1]["proteins"][ _ ],
+                    list( session[MODIFICATIONS_DATA1]["proteins"].keys( ) )
                 )
             )
             if len( protein_identifiers_unannotated ) > 0 :
@@ -203,10 +242,96 @@ def available_proteins():
                         _add_annotation_to_protein( failed_id, { }, failed = True )
 
             # Construct entry per protein in input data.
-            for protein_identifier in list( session[MODIFICATIONS_DATA]["proteins"].keys( ) ):
-                protein_name = _get_protein_name(session[MODIFICATIONS_DATA]["proteins"][protein_identifier]["annotation"])
-                protein_length = _get_protein_length(session[MODIFICATIONS_DATA]["proteins"][protein_identifier]["annotation"])
-                position_modification_data = session[MODIFICATIONS_DATA]["proteins"][
+            for protein_identifier in list( session[MODIFICATIONS_DATA1]["proteins"].keys( ) ):
+                protein_name = _get_protein_name(session[MODIFICATIONS_DATA1]["proteins"][protein_identifier]["annotation"])
+                protein_length = _get_protein_length(session[MODIFICATIONS_DATA1]["proteins"][protein_identifier]["annotation"])
+                position_modification_data = session[MODIFICATIONS_DATA1]["proteins"][
+                    protein_identifier
+                ]["positions"]
+                modified_positions = []
+                modifications = []
+                for modified_position in position_modification_data:
+                    modified_positions.append(int(modified_position))
+                    for modification in position_modification_data[modified_position][
+                        "modifications"
+                    ]:
+                        modifications.append(modification["display_name"])
+                modified_positions = sorted(modified_positions)
+                modifications = list(set(modifications))
+                protein_entry = {
+                    "id": protein_identifier,
+                    "name": protein_name,
+                    "length": protein_length,
+                    "modified_positions": len(modified_positions),
+                    "unique_modifications": len(modifications),
+                    "modifications": "$".join(modifications),
+                }
+                protein_entries.append(protein_entry)
+            # Uncomment for local development.
+            """
+            if DEBUG :
+                    with open( "./dump.json", "w+" ) as dumpfile :
+                        dumpfile.write( json.dumps( session[MODIFICATIONS_DATA1], indent = 3 ) )
+            """
+
+            return protein_entries, 200
+        else :
+            raise Exception("Faulty session data.")
+    except Exception as e:
+        return "[Status 500] Failed request to get available proteins: " + _format_exception(e), 500
+
+
+@app.route("/available_proteins2", methods=["GET"])
+def available_proteins2():
+    """
+    Route to retrieve all available proteins of the session as a JSON.
+    For dataset 2 (Dual mode)
+    """
+    try :
+        protein_entries = []
+        if MODIFICATIONS_DATA2 in session:
+            protein_identifiers_unannotated = list(
+                filter(
+                    lambda _ : "annotation" not in session[MODIFICATIONS_DATA2]["proteins"][ _ ],
+                    list( session[MODIFICATIONS_DATA2]["proteins"].keys( ) )
+                )
+            )
+            if len( protein_identifiers_unannotated ) > 0 :
+                annotations = _map_uniprot_identifiers(
+                    protein_identifiers_unannotated,
+                    "UniProtKB"
+                )
+
+                # remove IDs that were demerged in UniProt into multiple
+                # we don't know the original sequence, site mapping would go wrong
+                seen = set()
+                duplicates = set(item["from"] for item in annotations["results"] if item["from"] in seen or seen.add(item["from"]))
+
+                # remove them from results
+                annotations["results"] = [item for item in annotations["results"] if item["from"] not in duplicates]
+
+                if "failedIds" in annotations :
+                    annotations["failedIds"].extend(list(duplicates))
+                else :
+                    annotations["failedIds"] = list(duplicates)
+
+                # Number of demerged proteins / failed IDs to show user
+                #if env_parameters["DEBUG"] :
+                #n_demerged = len(duplicates)
+                #n_failed = len(annotations["failedIds"])
+
+                if "results" in annotations :
+                    for entry in annotations[ "results" ] :
+                        _add_annotation_to_protein( entry["from"], entry["to"] )
+                if "failedIds" in annotations :
+                    for failed_id in annotations[ "failedIds" ] :
+                        _add_annotation_to_protein( failed_id, { }, failed = True )
+
+            # Construct entry per protein in input data.
+            for protein_identifier in list( session[MODIFICATIONS_DATA2]["proteins"].keys( ) ):
+                protein_name = _get_protein_name(session[MODIFICATIONS_DATA2]["proteins"][protein_identifier]["annotation"])
+                protein_length = _get_protein_length(session[MODIFICATIONS_DATA2]["proteins"][protein_identifier]["annotation"])
+                position_modification_data = session[MODIFICATIONS_DATA2]["proteins"][
                     protein_identifier
                 ]["positions"]
                 modified_positions = []
@@ -233,7 +358,7 @@ def available_proteins():
             """
             if DEBUG :
                     with open( "./dump.json", "w+" ) as dumpfile :
-                        dumpfile.write( json.dumps( session[MODIFICATIONS_DATA], indent = 3 ) )
+                        dumpfile.write( json.dumps( session[MODIFICATIONS_DATA1], indent = 3 ) )
             """
 
             return protein_entries, 200
@@ -241,6 +366,7 @@ def available_proteins():
             raise Exception("Faulty session data.")
     except Exception as e:
         return "[Status 500] Failed request to get available proteins: " + _format_exception(e), 500
+
 
 
 @app.route("/overview_data", methods=["GET"])
@@ -252,11 +378,11 @@ def overview_data():
         modifications =  { } # Stores all present modifications together with their count.
         modification_co_occurrence = { } # Maps pairs of modification display names to their co-occurrence count.
         modification_classification_counts = { }
-        if MODIFICATIONS_DATA in session:
-            protein_identifiers = [_ for _ in session[MODIFICATIONS_DATA]["proteins"]]
+        if MODIFICATIONS_DATA1 in session:
+            protein_identifiers = [_ for _ in session[MODIFICATIONS_DATA1]["proteins"]]
             dataset_size = len( protein_identifiers )
             for protein_identifier in protein_identifiers:
-                modification_data = session[MODIFICATIONS_DATA]["proteins"][
+                modification_data = session[MODIFICATIONS_DATA1]["proteins"][
                     protein_identifier
                 ]["positions"]
                 for position in modification_data:
@@ -296,7 +422,69 @@ def overview_data():
                 [ modifications_by_mass_shift, modifications_by_count ],
                 modification_co_occurrence,
                 modification_classification_counts,
-                session[MODIFICATIONS_DATA][ "meta_data" ]
+                session[MODIFICATIONS_DATA1][ "meta_data" ]
+            ], 200
+        else :
+            raise Exception("Faulty session data.")
+    except Exception as e:
+        return "[Status 500] Failed request to get global/sample-level PTM data: " + _format_exception(e), 500
+
+
+
+@app.route("/overview_data2", methods=["GET"])
+def overview_data2():
+    """
+    Route to retrieve overview data of the session as a JSON.
+    """
+    try :
+        modifications =  { } # Stores all present modifications together with their count.
+        modification_co_occurrence = { } # Maps pairs of modification display names to their co-occurrence count.
+        modification_classification_counts = { }
+        if MODIFICATIONS_DATA2 in session:
+            protein_identifiers = [_ for _ in session[MODIFICATIONS_DATA2]["proteins"]]
+            dataset_size = len( protein_identifiers )
+            for protein_identifier in protein_identifiers:
+                modification_data = session[MODIFICATIONS_DATA2]["proteins"][
+                    protein_identifier
+                ]["positions"]
+                for position in modification_data:
+                    modifications_at_position = []
+                    for modification in modification_data[position][
+                        "modifications"
+                    ]:
+                        modification_name = modification["display_name"]
+                        modifications.setdefault( modification_name, deepcopy( modification ) )
+
+                        modifications[ modification_name ].setdefault( "count", 0 )
+                        modifications[ modification_name ][ "count" ] += 1
+
+                        modifications[ modification_name ].setdefault( "occurrence", [ ] )
+                        modifications[ modification_name ][ "occurrence" ].append( protein_identifier )
+
+                        modifications_at_position.append(modification_name)
+
+                        modification_classification = modification[ "modification_classification" ]
+                        modification_classification_counts.setdefault( modification_classification, 0 )
+                        modification_classification_counts[ modification_classification ] += 1
+
+                    for modifications_pair_tuple in combinations(set(modifications_at_position), 2):
+                        modifications_pair = "@".join( sorted( list( modifications_pair_tuple ) ) )
+                        modification_co_occurrence.setdefault( modifications_pair, 0 )
+                        modification_co_occurrence[ modifications_pair ] += 1
+
+            for modification_name, modification in modifications.items( ) :
+                modification[ "frequency" ] = round( ( len( set( modifications[ modification_name ][ "occurrence" ] ) ) / dataset_size ) * 100, 2 )
+            del modifications[ modification_name ][ "occurrence" ]
+
+            modifications_by_mass_shift = sorted( list( modifications.keys( ) ), key = lambda k : -modifications[k][ "mass_shift" ] if type( modifications[k][ "mass_shift" ] ) != str else 0.0 )
+            modifications_by_count = sorted( list( modifications.keys( ) ), key = lambda k : -modifications[k][ "count" ] )
+
+            return [
+                modifications,
+                [ modifications_by_mass_shift, modifications_by_count ],
+                modification_co_occurrence,
+                modification_classification_counts,
+                session[MODIFICATIONS_DATA2][ "meta_data" ]
             ], 200
         else :
             raise Exception("Faulty session data.")
@@ -315,46 +503,101 @@ def protein_data():
         if json_request_data["pdb_text"] != None:
             structure, pdb_text = utils.parse_structure(json_request_data["pdb_text"])
         else:
-            if "structure" in session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ] :
-                pdb_text = utils._brotli_decompress( session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ]["structure"] )
+            if "structure" in session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ] :
+                pdb_text = utils._brotli_decompress( session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ]["structure"] )
                 structure = utils.parse_structure( pdb_text )
             else :
                 structure, pdb_text = utils.get_structure(json_request_data["uniprot_pa"])
                 # Extract protein sequence from structure and store it in session data.
-                session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ]["sequence"] = utils.get_sequence_from_structure(structure)
-                session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ][ "structure" ] = utils._brotly_compress(pdb_text)
+                session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ]["sequence"] = utils.get_sequence_from_structure(structure)
+                session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ][ "structure" ] = utils._brotly_compress(pdb_text)
         if structure != None:
             # Extract annotations for protein from UniProt.
             # NOTE: Temp. deprecated code segment; Data is (experimental) queried from UniProt by initial analysis for all proteins. This may be re-used if performance issues occur.
-            # if not "annotation" in session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ] :
+            # if not "annotation" in session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ] :
             #    annotation = _map_uniprot_identifiers(
             #        [json_request_data["uniprot_pa"]], "UniProtKB"
             #    )
-            #    session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ]["annotation"] = { }
-            #    session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ]["annotation"] = annotation[ "results" ][ 0 ][ "to" ]
+            #    session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ]["annotation"] = { }
+            #    session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ]["annotation"] = annotation[ "results" ][ 0 ][ "to" ]
             # Compute contacts from structure and store them in session data.
-            if not "contacts" in session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ] :
-                session[MODIFICATIONS_DATA]["meta_data"]["distance_cutoff"] = float(json_request_data["cutoff"])
-                session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ] = { }
+            if not "contacts" in session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ] :
+                session[MODIFICATIONS_DATA1]["meta_data"]["distance_cutoff"] = float(json_request_data["cutoff"])
+                session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ] = { }
                 distance_matrix = utils.get_distance_matrix(structure)
                 contacts = utils.get_contacts(
                     distance_matrix,
-                    session[MODIFICATIONS_DATA]["meta_data"]["distance_cutoff"],
+                    session[MODIFICATIONS_DATA1]["meta_data"]["distance_cutoff"],
                 )
                 for source_index, contacts_list in contacts.items( ) :
-                    session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ][ source_index + 1 ] = { }
+                    session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ][ source_index + 1 ] = { }
                     for contact_index in contacts_list :
-                        session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ][ source_index + 1 ][ contact_index + 1 ] = round( distance_matrix[ source_index, contact_index ], 4 )
+                        session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ][ source_index + 1 ][ contact_index + 1 ] = round( distance_matrix[ source_index, contact_index ], 4 )
             # Construct response
-            response = deepcopy( session[MODIFICATIONS_DATA]["proteins"][ json_request_data["uniprot_pa"] ] )
+            response = deepcopy( session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ] )
             response[ "structure" ] = utils._brotli_decompress( response[ "structure" ] )
-            response[ "meta" ] = session[MODIFICATIONS_DATA]["meta_data"]
+            response[ "meta" ] = session[MODIFICATIONS_DATA1]["meta_data"]
             _set_session_state(**{STATE_PROTEIN_SELECTED: json_request_data["uniprot_pa"]})
             return response, 200
         else :
             return "Error in request '/get_protein_data': No protein structure available.", 303
     except Exception as e:
         return "[Status 500] Failed request to get protein PTM data: " + _format_exception(e), 500
+
+
+@app.route("/protein_data2", methods=["POST"])
+def protein_data2():
+    """
+    Route to retrieve data for a specific protein of the second Dataset.
+    """
+    try :
+        json_request_data = _request_to_json(request.data)
+        # Try to fetch PDB format structure for UniProt identifier from AlphaFold database.
+        if json_request_data["pdb_text"] != None:
+            structure, pdb_text = utils.parse_structure(json_request_data["pdb_text"])
+        else:
+            if "structure" in session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ] :
+                pdb_text = utils._brotli_decompress( session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ]["structure"] )
+                structure = utils.parse_structure( pdb_text )
+            else :
+                structure, pdb_text = utils.get_structure(json_request_data["uniprot_pa"])
+                # Extract protein sequence from structure and store it in session data.
+                session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ]["sequence"] = utils.get_sequence_from_structure(structure)
+                session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ][ "structure" ] = utils._brotly_compress(pdb_text)
+        if structure != None:
+            # Extract annotations for protein from UniProt.
+            # NOTE: Temp. deprecated code segment; Data is (experimental) queried from UniProt by initial analysis for all proteins. This may be re-used if performance issues occur.
+            # if not "annotation" in session[MODIFICATIONS_DATA1]["proteins"][ json_request_data["uniprot_pa"] ] :
+            #    annotation = _map_uniprot_identifiers(
+            #        [json_request_data["uniprot_pa"]], "UniProtKB"
+            #    )
+            #    session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ]["annotation"] = { }
+            #    session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ]["annotation"] = annotation[ "results" ][ 0 ][ "to" ]
+            # Compute contacts from structure and store them in session data.
+            if not "contacts" in session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ] :
+                session[MODIFICATIONS_DATA2]["meta_data"]["distance_cutoff"] = float(json_request_data["cutoff"])
+                session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ] = { }
+                distance_matrix = utils.get_distance_matrix(structure)
+                contacts = utils.get_contacts(
+                    distance_matrix,
+                    session[MODIFICATIONS_DATA2]["meta_data"]["distance_cutoff"],
+                )
+                for source_index, contacts_list in contacts.items( ) :
+                    session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ][ source_index + 1 ] = { }
+                    for contact_index in contacts_list :
+                        session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ][ "contacts" ][ source_index + 1 ][ contact_index + 1 ] = round( distance_matrix[ source_index, contact_index ], 4 )
+            # Construct response
+            response = deepcopy( session[MODIFICATIONS_DATA2]["proteins"][ json_request_data["uniprot_pa"] ] )
+            response[ "structure" ] = utils._brotli_decompress( response[ "structure" ] )
+            response[ "meta" ] = session[MODIFICATIONS_DATA2]["meta_data"]
+            _set_session_state(**{STATE_PROTEIN_SELECTED: json_request_data["uniprot_pa"]})
+            return response, 200
+        else :
+            return "Error in request '/get_protein_data': No protein structure available.", 303
+    except Exception as e:
+        return "[Status 500] Failed request to get protein PTM data: " + _format_exception(e), 500
+
+
 
 
 @app.route("/session_state", methods=["GET"])
@@ -446,10 +689,10 @@ def _add_annotation_to_protein(protein_identifier: str, annotation: dict, failed
         failed (bool, optional): Flag indicating if annotation failed. Defaults to False.
     """
     if failed:
-        session[MODIFICATIONS_DATA]["proteins"][protein_identifier]["annotation"] = None
+        session[MODIFICATIONS_DATA1]["proteins"][protein_identifier]["annotation"] = None
     else:
         if protein_identifier != annotation["primaryAccession"]:
-            _rename_dictionary_entry(session[MODIFICATIONS_DATA]["proteins"], protein_identifier, annotation["primaryAccession"])
+            _rename_dictionary_entry(session[MODIFICATIONS_DATA1]["proteins"], protein_identifier, annotation["primaryAccession"])
             protein_identifier = annotation["primaryAccession"]
         # Adjust annotation.
         annotation.pop("entryType", None)
@@ -459,7 +702,7 @@ def _add_annotation_to_protein(protein_identifier: str, annotation: dict, failed
         annotation.pop("uniProtKBCrossReferences", None)
         annotation.pop("extraAttributes", None)
         # Set annotation to protein entry.
-        session[MODIFICATIONS_DATA]["proteins"][protein_identifier]["annotation"] = annotation
+        session[MODIFICATIONS_DATA1]["proteins"][protein_identifier]["annotation"] = annotation
 
 
 def _get_protein_name(annotation: dict) -> str:

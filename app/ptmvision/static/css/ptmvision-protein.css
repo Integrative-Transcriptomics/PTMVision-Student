@@ -1,0 +1,15 @@
+/*
+Style of the proteinview table
+*/
+
+#ProtTable{
+    height: 500px;
+    overflow: hidden;
+}
+
+#ProteinTreemap{
+    height: 800px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
