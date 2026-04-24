@@ -58,9 +58,6 @@ function readFile(file) {
     };
     fileReader.onerror = (error) => reject(error);
     fileReader.readAsText(file);
-
-    //Debug
-    //console.log(fileReader)
   });
 }
 
@@ -206,18 +203,12 @@ async function startSession() {
       $("body").css("cursor", "auto");
       removeNotification();
 
-      //DEBUG:
-      console.log("Missing Data input 1 case");
-
       return;
     }
     if ($("#data-input-form-2")[0].files.length == 0) {
       displayAlert("No search engine output data was supplied for file 2");
       $("body").css("cursor", "auto");
       removeNotification();
-
-      //DEBUG:
-      console.log("Missing Data input 2 case");
 
       return;
     }
