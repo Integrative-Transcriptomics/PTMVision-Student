@@ -295,5 +295,5 @@ async function startSession() {
 function clearCharts() {
   _overviewChart.clear();
   _proteinviewChart.clear();
-  //_dashboardChart.clear();
+  _dashboardChart.clear();
 }
