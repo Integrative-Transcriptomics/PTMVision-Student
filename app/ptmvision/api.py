@@ -280,13 +280,10 @@ def available_proteins():
     except Exception as e:
         return "[Status 500] Failed request to get available proteins: " + _format_exception(e), 500
 
-
+"""
+REWORK
 @app.route("/available_proteins2", methods=["GET"])
 def available_proteins2():
-    """
-    Route to retrieve all available proteins of the session as a JSON.
-    For dataset 2 (Dual mode)
-    """
     try :
         protein_entries = []
         if MODIFICATIONS_DATA2 in session:
@@ -355,18 +352,13 @@ def available_proteins2():
                 protein_entries.append(protein_entry)
 
             # Uncomment for local development.
-            """
-            if DEBUG :
-                    with open( "./dump.json", "w+" ) as dumpfile :
-                        dumpfile.write( json.dumps( session[MODIFICATIONS_DATA1], indent = 3 ) )
-            """
 
             return protein_entries, 200
         else :
             raise Exception("Faulty session data.")
     except Exception as e:
         return "[Status 500] Failed request to get available proteins: " + _format_exception(e), 500
-
+"""
 
 
 @app.route("/overview_data", methods=["GET"])
@@ -430,12 +422,10 @@ def overview_data():
         return "[Status 500] Failed request to get global/sample-level PTM data: " + _format_exception(e), 500
 
 
-
+"""
+REWORK:
 @app.route("/overview_data2", methods=["GET"])
 def overview_data2():
-    """
-    Route to retrieve overview data of the session as a JSON.
-    """
     try :
         modifications =  { } # Stores all present modifications together with their count.
         modification_co_occurrence = { } # Maps pairs of modification display names to their co-occurrence count.
@@ -490,7 +480,7 @@ def overview_data2():
             raise Exception("Faulty session data.")
     except Exception as e:
         return "[Status 500] Failed request to get global/sample-level PTM data: " + _format_exception(e), 500
-
+"""
 
 @app.route("/protein_data", methods=["POST"])
 def protein_data():
